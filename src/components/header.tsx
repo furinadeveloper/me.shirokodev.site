@@ -6,12 +6,62 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
+  const [audio, setAudio] = useState<null | HTMLAudioElement>(null);
+  const [isPlayAudio, setIsPlayAudio] = useState<boolean>(false);
   const [age, setAge] = useState<string>("");
   const [beginTime, setBeginTime] = useState<string>("");
   const [presence, setPresence] = useState<undefined | presenceType>();
-  const [timeStamp, setTimeStamp] = useState<string>("hh:mm:ss");
+  const [timeStamp, setTimeStamp] = useState<null | string>(null);
+  const [status, setStatus] = useState<string>("");
 
-  const statusRef = useRef<null | HTMLDivElement>(null);
+  const statusIconRef = useRef<null | HTMLDivElement>(null);
+  const statusTextRef = useRef<null | HTMLSpanElement>(null);
+
+  useEffect(() => {
+    setAudio(new Audio());
+
+    (function Socket() {
+      const socket = new WebSocket("wss://gateway.misonomika.site/");
+      socket.addEventListener(
+        "open",
+        () => {
+          console.log(`[Noti] Socket Connected!`);
+        },
+        { once: true }
+      );
+
+      socket.addEventListener("error", (event) => {
+        console.log("[Error] Socket Error! Proceed to reboot in 1000ms");
+        setTimeout(() => Socket(), 1000);
+      });
+
+      socket.addEventListener("close", (event) => {
+        console.log("[Noti] Socket closed");
+      });
+
+      socket.addEventListener("message", (message) => {
+        setPresence(JSON.parse(message.data));
+      });
+    })();
+  }, []);
+
+  if (audio && !audio.src) {
+    audio.src =
+      "https://cdn.discordapp.com/attachments/1171073523704418317/1175715506209161236/y2mate.com_-_OST_Blue_Archive_OST.mp3?ex=656c3d64&is=6559c864&hm=0805ebb967f23c511e3d0a1af2b62341f0f062951ebe5118963e75722b64e3e9&";
+    console.log(`[Noti] Music loaded! You can click my avatar to play it:3`);
+  }
+
+  const handleMusic = () => {
+    if (audio) {
+      if (!isPlayAudio) {
+        audio.play();
+        setIsPlayAudio(true);
+      } else {
+        audio.pause();
+        setIsPlayAudio(false);
+      }
+    }
+  };
 
   useEffect(() => {
     const now = new Date();
@@ -34,38 +84,37 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    const socket = new WebSocket("wss://gateway.misonomika.site/");
-    socket.addEventListener(
-      "open",
-      () => {
-        console.log(`[Noti] Socket Connected!`);
-      },
-      { once: true }
-    );
-
-    socket.addEventListener("message", (message) => {
-      setPresence(JSON.parse(message.data));
-    });
-  }, []);
-
-  useEffect(() => {
-    if (statusRef.current) {
-      switch (presence?.user?.status) {
-        case "online":
-          statusRef.current.style.backgroundColor = "#4ade80";
-          break;
-        case "offline":
-          statusRef.current.style.backgroundColor = "#5B5C6F";
-          break;
-        case "idle":
-          statusRef.current.style.backgroundColor = "#FACC15";
-          break;
-        case "dnd":
-          statusRef.current.style.backgroundColor = "#F23F43";
-          break;
+    if (statusIconRef.current && statusTextRef.current) {
+      if (presence?.user?.status) {
+        switch (presence.user.status) {
+          case "online":
+            statusIconRef.current.style.backgroundColor = "#4ade80";
+            statusTextRef.current.style.color = "#4ade80";
+            setStatus("Online:3");
+            break;
+          case "offline":
+            statusIconRef.current.style.backgroundColor = "#5B5C6F";
+            statusTextRef.current.style.color = "#5B5C6F";
+            setStatus("Offline:(");
+            break;
+          case "idle":
+            statusIconRef.current.style.backgroundColor = "#FACC15";
+            statusTextRef.current.style.color = "#FACC15";
+            setStatus("Idle...");
+            break;
+          case "dnd":
+            statusIconRef.current.style.backgroundColor = "#F23F43";
+            statusTextRef.current.style.color = "#F23F43";
+            setStatus("Do not disturb");
+            break;
+        }
+      } else {
+        statusIconRef.current.style.backgroundColor = "#5B5C6F";
+        statusTextRef.current.style.color = "#5B5C6F";
+        setStatus("Offline:(");
       }
     }
-  });
+  }, [presence, presence?.user?.status]);
 
   useEffect(() => {
     if (presence?.activity?.elapsed?.timestamp) {
@@ -88,7 +137,7 @@ export default function Header() {
           minutes.toString().padStart(2, "0"),
           seconds.toString().padStart(2, "0"),
         ].join(":");
-        setTimeStamp(formattedTime);
+        setTimeStamp(`Elapsed: ${formattedTime}`);
       }, 1000);
       return () => {
         clearInterval(interval);
@@ -97,40 +146,117 @@ export default function Header() {
   }, [presence]);
 
   return (
-    <header className="grid grid-cols-5 gap-10 w-full min-h-screen bg-light-main dark:bg-dark-main p-16">
-      <div className="flex flex-col justify-between col-span-3">
+    <header className="flex w-full min-h-screen flex-col lg:flex-row gap-10 bg-light-main dark:bg-dark-main p-2 sm:p-10 md:p-16">
+      <div className="flex flex-col gap-5 lg:gap-0 justify-between">
         <div className="flex flex-col">
-          <div className="flex mb-1">
-            <span className="font-bold text-4xl">Sunaookami Shiroko</span>
+          <div className="mb-1">
+            <span className="font-bold text-lg sm:text-xl md:text-4xl">Sunaookami Shiroko</span>
             <Image
               src={"/hello.svg"}
               alt="Hello Icon"
               width={0}
               height={0}
-              className="ml-3 w-8 aspect-square animate-wave"
+              className="inline-block ml-3 mb-3 w-8 aspect-square animate-wave"
             />
           </div>
-          <div className="flex mb-4">
-            <div ref={statusRef} className={`bg-offline h-5 aspect-square mr-2 my-auto rounded-full`} />
-            <span className="mr-4">currently {presence?.user?.status}</span>
-            <MapIcon className="fill-[#000] dark:fill-[#fff] my-auto mr-2" />
-            <span className="mr-2">Khanh Hoa / Viet Nam</span>
-            <Image
-              src={"/vietnam-flag.svg"}
-              alt="Viet Nam Flag"
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="w-5 h-auto"
-            />
+          <div className="flex flex-col sm:flex-row mb-4">
+            <div className="flex">
+              <div ref={statusIconRef} className={`bg-offline h-5 aspect-square mr-2 my-auto rounded-full`} />
+              <span className="mr-4">
+                currently{" "}
+                <span className="relative-state" ref={statusTextRef}>
+                  {presence?.user?.status || "offline"}
+                  <span className="absolute-state -right-2/3">{status}</span>
+                </span>
+              </span>
+            </div>
+            <div className="flex">
+              <MapIcon className="fill-[#000] dark:fill-[#fff] my-auto mr-2" />
+              <Link
+                href={"https://wikipedia.org/wiki/Kh%C3%A1nh_H%C3%B2a_province"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative-state mr-2"
+              >
+                Khanh Hoa / Viet Nam
+                <div className="absolute-state p-0">
+                  <Image
+                    src={"/kh-vn.webp"}
+                    alt="Khanh Hoa - Viet Nam"
+                    sizes="100vw"
+                    height={0}
+                    width={0}
+                    className="w-full h-auto"
+                  />
+                  <div className="p-2">
+                    Khánh Hòa is a southern coastal province in the South Central Coast region, the Central of Vietnam.
+                  </div>
+                </div>
+              </Link>
+              <Image
+                src={"/vietnam-flag.svg"}
+                alt="Viet Nam Flag"
+                width="0"
+                height="0"
+                sizes="100vw"
+                className="w-5 h-auto"
+              />
+            </div>
           </div>
-          <p className="max-w-[90%] my-2 text-lg">
-            Hi there, I&apos;m Shiroko - a normal student love programming. I&apos;m <span>{age}</span> years old and
-            have been studying it for <span>{beginTime}</span>.
+          <p className="my-2 text-lg">
+            ● Hi there, I&apos;m{" "}
+            <span className="relative-state">
+              Shiroko
+              <span className="absolute-state -right-2/3 w-[200px]">Other name: Xiroco, Lelira, Lira, Kayd.</span>
+            </span>{" "}
+            - a{" "}
+            <Link
+              href={"http://nvtroi.khanhhoa.edu.vn/"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative-state"
+            >
+              normal student
+              <span className="absolute-state">Currently I&apos;m studying at Nguyen Van Troi High School.</span>
+            </Link>{" "}
+            love programming.
           </p>
-          <p className="max-w-[90%] mb-2 text-lg">Front-end Developer from Elaina Team.</p>
-          <p className="max-w-[90%] mb-2 text-lg">Experienced with Next.JS and Linux System.</p>
+          <p className="mb-2 text-lg">
+            ● I&apos;m <span>{age}</span> years old and have been studying it for <span>{beginTime}.</span>
+          </p>
+          <p className="mb-2 text-lg">
+            ● Front-end Developer from{" "}
+            <Link href={"https://elainateam.io/"} target="_blank" className="relative-state">
+              Elaina Team
+              <span className="absolute-state">A developer team in Vietnam.</span>
+            </Link>
+            .
+          </p>
+          <p className="mb-2 text-lg">
+            ● Experienced with{" "}
+            <Link href={"https://nextjs.org/"} className="relative-state" target="_blank" rel="noopener noreferrer">
+              Next.JS
+              <span className="absolute-state">The React Framework for the Web.</span>
+            </Link>{" "}
+            and{" "}
+            <Link
+              href={"https://en.wikipedia.org/wiki/Linux"}
+              className="relative-state"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Linux System
+              <span className="absolute-state">
+                Linux is a family of open-source Unix-like operating systems based on the Linux kernel, an operating
+                system kernel first released on September 17, 1991, by Linus Torvalds.
+              </span>
+            </Link>
+            .
+          </p>
           <div className="flex w-full gap-3">
+            <span>
+              ● Contact me at <span className="hidden md:inline-block">(☞ﾟヮﾟ)☞</span>
+            </span>
             {[
               { name: "Github", link: "https://github.com/sunaookamishirokodev", icon: GithubIcon },
               {
@@ -156,35 +282,42 @@ export default function Header() {
                 </Link>
               );
             })}
+            <div>
+              <span className="hidden md:inline-block">☜(ﾟヮﾟ☜)</span>.
+            </div>
           </div>
         </div>
-        <div className={`${presence && presence.activity?.state !== null ? "flex" : "hidden"}`}>
+
+        <div
+          className={`flex shadow-main bg-light-main-100 dark:bg-dark-main-100 text-sm sm:text-md rounded-lg overflow-hidden`}
+        >
           <Image
-            src={presence?.activity?.largeImage ? presence.activity.largeImage : "/vietnam-flag.svg"}
-            unoptimized
+            src={presence?.activity?.largeImage ? presence.activity.largeImage : "/avatar.webp"}
             width="0"
             height="0"
             sizes="100vw"
-            className="w-[100px] h-auto"
+            className="w-[128px] aspect-square"
             alt={presence?.activity?.largeText || ""}
           />
-          <div className="flex flex-col gap-0.5 pl-3 py-1 w-full light-main-100 dark:bg-dark-main-100 rounded-r-md text-sm">
-            <span className="text-lg">{presence?.activity?.name}</span>
-            <span>{presence?.activity?.description}</span>
-            <span>{presence?.activity?.state}</span>
-            <span>Elapsed: {timeStamp}</span>
+          <div className="pl-3 my-auto">
+            <div className="text-md sm:text-lg">{presence?.activity?.name || "● The user currently has no activity or socket is error!"}</div>
+            <div>{presence?.activity?.description || "● Please contact with me to know it!"}</div>
+            <div>{presence?.activity?.state}</div>
+            <div>{timeStamp}</div>
           </div>
         </div>
       </div>
-      <div className="col-span-2">
+      <div className="flex flex-1">
         <Image
-          src={"/avatar.jpg"}
+          onClick={handleMusic}
+          src={presence?.user?.avatar || "/avatar.webp"}
           alt="Shiroko Avatar"
           priority
           height={0}
           width={0}
           sizes="100vw"
-          className="w-full rounded-3xl"
+          data-play={isPlayAudio ? true : false}
+          className="avatar w-full aspect-square shadow-main rounded-lg m-auto cursor-pointer transition-all"
         />
       </div>
     </header>

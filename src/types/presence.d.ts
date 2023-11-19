@@ -1,7 +1,7 @@
 type presenceType = {
   offline?: boolean;
   activity?: {
-    visile?: boolean;
+    visible?: boolean;
     name?: string;
     state?: string;
     description?: string;
@@ -14,6 +14,7 @@ type presenceType = {
       minutes?: string;
       seconds?: string;
       timestamp: number;
+      startTimestamp?: number
     };
   };
   status?: {

@@ -2,6 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .shadow-main {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+}
+
+@layer components {
+  .avatar[data-play="true"] {
+    --width-when-play: 70%;
+    width: var(--width-when-play);
+    border-radius: 100%;
+    animation: rotate 20s linear infinite
+  }
+  .avatar[data-play="true"] {
+    @apply border-[5px] border-dark-main-100 dark:border-light-main-100
+  }
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@layer components {
+  .relative-state {
+    @apply relative text-light-state dark:text-dark-state cursor-pointer;
+  }
+  .relative-state:hover .absolute-state {
+    display: block;
+    animation: visible 0.2s linear forwards;
+  }
+  .absolute-state {
+    @apply text-[#fff] dark:text-[#000] p-2 absolute hidden rounded-sm bg-dark-main dark:bg-light-main border border-dark-main-100 dark:border-light-main-100 text-sm z-10 right-0 after:absolute after:w-full after:h-2 after:-top-2 after:right-0 after:block after:bg-[transparent];
+  }
+  @keyframes visible {
+    0% {
+      transform: translateY(10%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+}
+
 @layer components {
   .animate-wave {
     animation: wave 2.5s ease-in-out infinite;
