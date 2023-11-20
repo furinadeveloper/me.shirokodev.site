@@ -31,7 +31,7 @@
 
 @layer components {
   .relative-state {
-    @apply relative text-light-state dark:text-dark-state cursor-pointer;
+    @apply relative text-light-state dark:text-dark-state;
   }
   .relative-state:hover .absolute-state {
     display: block;

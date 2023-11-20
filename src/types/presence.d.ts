@@ -14,12 +14,14 @@ type presenceType = {
       minutes?: string;
       seconds?: string;
       timestamp: number;
-      startTimestamp?: number
+      startTimestamp?: number;
     };
   };
   status?: {
     emoji?: {
       custom?: boolean;
+      name?: string;
+      url?: null | string;
     };
     name?: string;
   };

@@ -5,6 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
+const musicURL =
+  "https://cdn.discordapp.com/attachments/1171073523704418317/1175715506209161236/y2mate.com_-_OST_Blue_Archive_OST.mp3?ex=656c3d64&is=6559c864&hm=0805ebb967f23c511e3d0a1af2b62341f0f062951ebe5118963e75722b64e3e9&";
+
 export default function Header() {
   const [audio, setAudio] = useState<null | HTMLAudioElement>(null);
   const [isPlayAudio, setIsPlayAudio] = useState<boolean>(false);
@@ -15,7 +18,7 @@ export default function Header() {
   const [status, setStatus] = useState<string>("");
 
   const statusIconRef = useRef<null | HTMLDivElement>(null);
-  const statusTextRef = useRef<null | HTMLSpanElement>(null);
+  const statusTextRef = useRef<null | HTMLAnchorElement>(null);
 
   useEffect(() => {
     setAudio(new Audio());
@@ -44,12 +47,6 @@ export default function Header() {
       });
     })();
   }, []);
-
-  if (audio && !audio.src) {
-    audio.src =
-      "https://cdn.discordapp.com/attachments/1171073523704418317/1175715506209161236/y2mate.com_-_OST_Blue_Archive_OST.mp3?ex=656c3d64&is=6559c864&hm=0805ebb967f23c511e3d0a1af2b62341f0f062951ebe5118963e75722b64e3e9&";
-    console.log(`[Noti] Music loaded! You can click my avatar to play it:3`);
-  }
 
   const handleMusic = () => {
     if (audio) {
@@ -84,33 +81,39 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
+    const color = {
+      online: "#4ade80",
+      offline: "#CCCCCC",
+      idle: "#FACC15",
+      dnd: "#F23F43",
+    };
     if (statusIconRef.current && statusTextRef.current) {
       if (presence?.user?.status) {
         switch (presence.user.status) {
           case "online":
-            statusIconRef.current.style.backgroundColor = "#4ade80";
-            statusTextRef.current.style.color = "#4ade80";
+            statusIconRef.current.style.backgroundColor = color.online;
+            statusTextRef.current.style.color = color.online;
             setStatus("Online:3");
             break;
           case "offline":
-            statusIconRef.current.style.backgroundColor = "#5B5C6F";
-            statusTextRef.current.style.color = "#5B5C6F";
+            statusIconRef.current.style.backgroundColor = color.offline;
+            statusTextRef.current.style.color = color.offline;
             setStatus("Offline:(");
             break;
           case "idle":
-            statusIconRef.current.style.backgroundColor = "#FACC15";
-            statusTextRef.current.style.color = "#FACC15";
+            statusIconRef.current.style.backgroundColor = color.idle;
+            statusTextRef.current.style.color = color.idle;
             setStatus("Idle...");
             break;
           case "dnd":
-            statusIconRef.current.style.backgroundColor = "#F23F43";
-            statusTextRef.current.style.color = "#F23F43";
+            statusIconRef.current.style.backgroundColor = color.dnd;
+            statusTextRef.current.style.color = color.dnd;
             setStatus("Do not disturb");
             break;
         }
       } else {
-        statusIconRef.current.style.backgroundColor = "#5B5C6F";
-        statusTextRef.current.style.color = "#5B5C6F";
+        statusIconRef.current.style.backgroundColor = color.offline;
+        statusTextRef.current.style.color = color.offline;
         setStatus("Offline:(");
       }
     }
@@ -145,6 +148,13 @@ export default function Header() {
     }
   }, [presence]);
 
+  useEffect(() => {
+    if (audio && !audio.src) {
+      audio.src = musicURL;
+      console.log(`[Noti] Music loaded! You can click my avatar to play it:3`);
+    }
+  }, [audio])
+
   return (
     <header className="flex w-full min-h-screen flex-col lg:flex-row gap-10 bg-light-main dark:bg-dark-main p-2 sm:p-10 md:p-16">
       <div className="flex flex-col gap-5 lg:gap-0 justify-between">
@@ -164,10 +174,10 @@ export default function Header() {
               <div ref={statusIconRef} className={`bg-offline h-5 aspect-square mr-2 my-auto rounded-full`} />
               <span className="mr-4">
                 currently{" "}
-                <span className="relative-state" ref={statusTextRef}>
+                <Link onClick={(e) => e.preventDefault()} href={"/"} className="relative-state" ref={statusTextRef}>
                   {presence?.user?.status || "offline"}
                   <span className="absolute-state -right-2/3">{status}</span>
-                </span>
+                </Link>
               </span>
             </div>
             <div className="flex">
@@ -205,10 +215,10 @@ export default function Header() {
           </div>
           <p className="my-2 text-lg">
             ● Hi there, I&apos;m{" "}
-            <span className="relative-state">
+            <Link onClick={(e) => e.preventDefault()} href={"/"} className="relative-state">
               Shiroko
               <span className="absolute-state -right-2/3 w-[200px]">Other name: Xiroco, Lelira, Lira, Kayd.</span>
-            </span>{" "}
+            </Link>{" "}
             - a{" "}
             <Link
               href={"http://nvtroi.khanhhoa.edu.vn/"}
@@ -277,8 +287,11 @@ export default function Header() {
             ].map((item, index) => {
               const Icon = item.icon;
               return (
-                <Link href={item.link} key={index}>
-                  <Icon className="fill-[#000] dark:fill-[#fff] hover:!fill-[#67e8f9] transition-colors" />
+                <Link href={item.link} target="_blank" rel="nooponer noreferrer" key={index}>
+                  <Icon
+                    aria-label={item.name}
+                    className="fill-[#000] dark:fill-[#fff] hover:!fill-[#67e8f9] transition-colors"
+                  />
                 </Link>
               );
             })}
@@ -300,7 +313,9 @@ export default function Header() {
             alt={presence?.activity?.largeText || ""}
           />
           <div className="pl-3 my-auto">
-            <div className="text-md sm:text-lg">{presence?.activity?.name || "● The user currently has no activity or socket is error!"}</div>
+            <div className="text-md sm:text-lg">
+              {presence?.activity?.name || "● The user currently has no activity or socket is error!"}
+            </div>
             <div>{presence?.activity?.description || "● Please contact with me to know it!"}</div>
             <div>{presence?.activity?.state}</div>
             <div>{timeStamp}</div>
