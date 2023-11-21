@@ -14,7 +14,7 @@ if (typeof window !== "undefined") {
 export default function Home({ children }: { children: React.ReactNode }) {
   return (
     <body suppressHydrationWarning className={`${font.className} bg-[#f8fafc] dark:bg-[#000]`}>
-      <ThemeProvider attribute="data-mode" defaultTheme="light">
+      <ThemeProvider attribute="data-mode" defaultTheme="dark">
         {children}
         <Noti />
       </ThemeProvider>

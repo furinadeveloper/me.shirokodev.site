@@ -30,56 +30,14 @@ export default function Introduction() {
   return (
     <>
       <p className="my-2 text-lg">
-        ● Hi there, I&apos;m{" "}
-        <Link onClick={(e) => e.preventDefault()} href={"/"} className="relative-state text-state">
-          {Infomation.shortname}
-          <span className="absolute-state -right-2/3 w-[200px]">Other name: {Infomation.otherName}.</span>
-        </Link>{" "}
-        - a{" "}
-        <Link
-          href={Infomation.school.website}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative-state text-state"
-        >
-          normal {Infomation.job}
-          <span className="absolute-state">Currently I&apos;m studying at {Infomation.school.name}.</span>
-        </Link>{" "}
-        love programming.
+        ● Hi there, I&apos;m {Infomation.shortname} - a normal {Infomation.job} love programming.
       </p>
       <p className="mb-2 text-lg">
-        ● I&apos;m <span>{age}</span> years old and have been studying it for <span>{beginTime}.</span>
+        ● I&apos;m {age} years old and have been studying it for {beginTime}.
       </p>
+      <p className="mb-2 text-lg">● Front-end Developer from {Team.name}.</p>
       <p className="mb-2 text-lg">
-        ● Front-end Developer from{" "}
-        <Link href={Team.website} target="_blank" className="relative-state text-state">
-          {Team.name}
-          <span className="absolute-state right-0">{Team.desc}</span>
-        </Link>
-        .
-      </p>
-      <p className="mb-2 text-lg">
-        ● Experienced with{" "}
-        <Link
-          href={BestTechnology.framework.website}
-          className="relative-state text-state"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {BestTechnology.framework.name}
-          <span className="absolute-state">{BestTechnology.framework.desc}</span>
-        </Link>{" "}
-        and{" "}
-        <Link
-          href={BestTechnology.system.website}
-          className="relative-state text-state"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {BestTechnology.system.name} System
-          <span className="absolute-state">{BestTechnology.system.desc}</span>
-        </Link>
-        .
+        ● Experienced with {BestTechnology.framework.name} and {BestTechnology.system.name} System.
       </p>
       <div className="flex w-full gap-3">
         <span>

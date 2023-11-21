@@ -8,7 +8,6 @@ import { Infomation } from "@/resources/author";
 export default function AuthorState({ presence }: { presence: undefined | presenceType }) {
   const statusIconRef = useRef<null | HTMLSpanElement>(null);
 
-  console.log(presence)
   useEffect(() => {
     if (statusIconRef.current) {
       if (presence?.user?.status) {
@@ -46,32 +45,14 @@ export default function AuthorState({ presence }: { presence: undefined | presen
       </div>
       <div className="flex flex-col sm:flex-row mb-4">
         <div className="flex">
-          <span ref={statusIconRef} className="relative-state bg-offline h-5 aspect-square mr-2 my-auto rounded-full">
-            <div className="absolute-state top-[110%] left-0 w-full">Hello</div>
-          </span>
+          <span ref={statusIconRef} className="bg-offline h-5 aspect-square mr-2 my-auto rounded-full" />
           <span className="mr-4">currently {presence?.user?.status?.type || "offline"}</span>
         </div>
         <div className="flex">
           <MapIcon className="fill-[#000] dark:fill-[#fff] my-auto mr-2" />
-          <Link
-            href={Infomation.address.wiki}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative-state text-state mr-2"
-          >
+          <span className="mr-2">
             {Infomation.address.province} / {Infomation.address.country}
-            <div className="absolute-state p-0">
-              <Image
-                src={"/kh-vn.webp"}
-                alt={`${Infomation.address.province} - ${Infomation.address.country}`}
-                sizes="100vw"
-                height={0}
-                width={0}
-                className="w-full h-auto"
-              />
-              <div className="p-2">{Infomation.address.desc}</div>
-            </div>
-          </Link>
+          </span>
           <Image
             src={Infomation.address.flag}
             alt="Viet Nam Flag"

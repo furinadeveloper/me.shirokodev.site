@@ -32,7 +32,7 @@ export default function Avatar({ presence }: { presence: undefined | presenceTyp
   return (
     <Image
       onClick={handleMusic}
-      src={"/avatar.webp"}
+      src={presence?.user?.avatar ? `${presence.user.avatar}?size=512` : "/avatar.webp"}
       alt="Shiroko Avatar"
       priority
       height={0}
