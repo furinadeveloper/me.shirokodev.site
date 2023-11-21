@@ -54,10 +54,13 @@ type a = {
     largeImage?: string;
     smallImage?: string;
     alt?: string;
+    app?: string;
+    state?: string;
+    detail?: string;
     time?: {
-      start?: number;
-      elapsed?: number;
-      end?: number;
+      start?: number | null;
+      elapsed?: number | null;
+      end?: number | null;
     };
   };
 };
