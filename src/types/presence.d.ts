@@ -1,34 +1,63 @@
 type presenceType = {
-  offline?: boolean;
   activity?: {
-    visible?: boolean;
+    assets?: {
+      largeImage?: string;
+      largeText?: string;
+      smallImage?: string;
+      smallText?: string;
+    };
+    createdTimestamp?: number;
+    details?: string;
     name?: string;
     state?: string;
-    description?: string;
-    largeImage?: string;
-    smallImage?: string;
-    largeText?: string;
-    smallText?: string;
-    elapsed?: {
-      hours?: string;
-      minutes?: string;
-      seconds?: string;
-      timestamp: number;
-      startTimestamp?: number;
+    timestamps?: {
+      end?: null | string;
+      start?: number;
     };
+    url: null | string;
   };
-  status?: {
+  customStatus?: {
     emoji?: {
-      custom?: boolean;
       name?: string;
       url?: null | string;
     };
-    name?: string;
+    state?: string;
   };
   user?: {
     avatar?: string;
-    name?: string;
-    status?: string;
+    displayName?: string;
+    status?: {
+      devices: {
+        desktop: "idle" | "dnd" | "online" | "offline";
+        mobile: "idle" | "dnd" | "online" | "offline";
+      };
+      type: "idle" | "dnd" | "online" | "offline";
+    };
     username?: string;
+  };
+};
+
+type a = {
+  user?: {
+    displayName?: string;
+    userName?: string;
+    avatar?: string;
+    status?: {
+      devices?: {
+        mobile?: "online" | "offline";
+        desktop?: "online" | "offline";
+      };
+      state?: "idle" | "dnd" | "online" | "offline";
+    };
+  };
+  activity?: {
+    largeImage?: string;
+    smallImage?: string;
+    alt?: string;
+    time?: {
+      start?: number;
+      elapsed?: number;
+      end?: number;
+    };
   };
 };
