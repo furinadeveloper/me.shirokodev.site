@@ -39,7 +39,7 @@ export default function VSCode({ presence }: { presence: undefined | presenceTyp
       } shadow-main bg-light-main-100 dark:bg-dark-main-100 text-sm sm:text-md rounded-lg overflow-hidden`}
     >
       <Image
-        src={presence?.activity?.assets?.largeImage ? presence.activity.assets.largeImage : "/avatar.webp"}
+        src={presence?.activity?.assets?.largeImage || "/avatar.webp"}
         width="0"
         height="0"
         sizes="100vw"
@@ -48,9 +48,9 @@ export default function VSCode({ presence }: { presence: undefined | presenceTyp
       />
       <div className="pl-3 my-auto">
         <div className="text-md sm:text-lg">
-          {presence?.activity?.name || "● The user currently has no activity or socket is error!"}
+          {presence?.activity?.name || ""}
         </div>
-        <div>{presence?.activity?.state || "● Please contact with me to know it!"}</div>
+        <div>{presence?.activity?.state || ""}</div>
         <div>{presence?.activity?.details}</div>
         <div>{timeStamp}</div>
       </div>

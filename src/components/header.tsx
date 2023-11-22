@@ -18,38 +18,6 @@ export default function Header() {
       ws.addEventListener("message", async ({ data }: { data: string }) => setPresence(JSON.parse(data)));
     })();
   }, []);
-  //   const Socket = {
-  //     socket: new WebSocket(SocketURL),
-  //     socketOpen() {
-  //       console.log(`[Noti] Socket Connected!`);
-  //     },
-  //     socketError() {
-  //       console.log(`[Error] Socket Error! Proceed to reboot in ${rebootDelay}ms`);
-  //       setTimeout(() => NewSocket(), rebootDelay);
-  //     },
-  //     socketClose() {
-  //       console.log("[Noti] Socket Closed!");
-  //       setTimeout(() => NewSocket(), rebootDelay);
-  //     },
-  //     socketMessage(data: string) {
-  //       setPresence(JSON.parse(data));
-  //     },
-  //   };
-
-  //   function NewSocket() {
-  //     Socket.socket.addEventListener("open", Socket.socketOpen, { once: true });
-  //     Socket.socket.addEventListener("error", Socket.socketError);
-  //     Socket.socket.addEventListener("close", Socket.socketClose);
-  //     Socket.socket.addEventListener("message", (message: any) => Socket.socketMessage(message.data));
-  //   }
-  //   NewSocket();
-  //   return () => {
-  //     Socket.socket.removeEventListener("open", Socket.socketOpen);
-  //     Socket.socket.removeEventListener("error", Socket.socketError);
-  //     Socket.socket.removeEventListener("close", Socket.socketClose);
-  //     Socket.socket.removeEventListener("message", (message: any) => Socket.socketMessage(message.data));
-  //   };
-  // }, []);
 
   return (
     <header className="box-layout flex min-h-screen flex-col lg:flex-row gap-10">

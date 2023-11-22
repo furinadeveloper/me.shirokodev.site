@@ -1,14 +1,18 @@
 import Image from "next/image";
-import { nav } from "@/resources/nav";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
-export default function Nav() {
-  const searchParams = useSearchParams();
+export default function Nav({
+  nav,
+  tab,
+  setTab,
+}: {
+  nav: navType[];
+  tab: string | null;
+  setTab: Dispatch<SetStateAction<string | null>>;
+}) {
   const router = useRouter();
-
-  const [tab, setTab] = useState<null | string>(searchParams.get("tab") || nav[0].query);
 
   return (
     <nav className="fade-in flex min-h-[28px] select-none flex-wrap gap-4 font-bold">
@@ -24,7 +28,7 @@ export default function Nav() {
             }}
             className={`${
               item.query === tab ? "z-10" : "cursor-pointer bg-light-main-100 dark:bg-dark-main-100"
-            } flex relative gap-2 rounded-md overflow-hidden items-center px-2 py-[2px]`}
+            } flex fade-in relative gap-2 rounded-md overflow-hidden items-center px-2 py-[2px]`}
           >
             <span>{item.name}</span>
             <Image

@@ -7,7 +7,7 @@ import games from "@/svgs/games.svg";
 
 const colorOpacity = 0.3;
 
-export const nav = [
+export const nav: navType[] = [
   {
     query: "projects",
     name: "Projects",
