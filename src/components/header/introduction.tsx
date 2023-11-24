@@ -66,7 +66,7 @@ export default function Introduction() {
             <Link href={item.link} target="_blank" rel="nooponer noreferrer" key={index}>
               <Icon
                 aria-label={item.name}
-                className="fill-[#000] dark:fill-[#fff] hover:!fill-[#67e8f9] transition-colors"
+                className="fill-[#fff] hover:!fill-[#67e8f9] transition-colors"
               />
             </Link>
           );

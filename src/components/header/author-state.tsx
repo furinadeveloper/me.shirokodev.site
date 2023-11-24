@@ -49,7 +49,7 @@ export default function AuthorState({ presence }: { presence: undefined | presen
           <span className="mr-4">currently {presence?.user?.status?.type || "offline"}</span>
         </div>
         <div className="flex">
-          <MapIcon className="fill-[#000] dark:fill-[#fff] my-auto mr-2" />
+          <MapIcon className="fill-[#fff] my-auto mr-2" />
           <span className="mr-2">
             {Infomation.address.province} / {Infomation.address.country}
           </span>

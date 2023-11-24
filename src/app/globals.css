@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 @layer utilities {
-  .bg-light-main {
-    background-color: #ffffff;
+  .div-layout {
+    @apply bg-[#171615] border-[rgba(255,255,255,0.2)]
   }
 
   .bg-dark-main {
     background-color: #121212;
   }
 
-  .border-dark-main-100 {
-    border-color: #393939;
+  .border-dark-main {
+    border-color: #121212;
   }
 
-  .border-light-main-100 {
-    border-color: #f5f5f5;
+  .border-dark-main-100 {
+    border-color: #393939;
   }
 
   .bg-dark-main-100 {
@@ -28,7 +28,7 @@
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   }
   .box-layout {
-    @apply w-full bg-light-main dark:bg-dark-main p-2 sm:p-10 md:p-16 rounded-xl;
+    @apply w-full bg-dark-main p-2 sm:p-10 md:p-16 rounded-xl;
   }
 }
 
@@ -176,7 +176,7 @@
     animation: rotate 20s linear infinite;
   }
   .avatar[data-play="true"] {
-    @apply border-[5px] border-dark-main-100 dark:border-light-main-100;
+    @apply border-[5px] border-[#f5f5f5];
   }
   @keyframes rotate {
     0% {
@@ -184,32 +184,6 @@
     }
     100% {
       transform: rotate(360deg);
-    }
-  }
-}
-
-@layer components {
-  .relative-state {
-    @apply relative;
-  }
-  .relative-state.text-state {
-    @apply text-light-state dark:text-dark-state;
-  }
-  .relative-state:hover .absolute-state {
-    display: block;
-    animation: visible 0.2s linear forwards;
-  }
-  .absolute-state {
-    @apply text-[#fff] dark:text-[#000] p-2 absolute hidden rounded-sm bg-dark-main dark:bg-light-main border border-dark-main-100 dark:border-light-main-100 text-sm z-10 after:absolute after:w-full after:h-2 after:-top-2 after:right-0 after:block after:bg-[transparent];
-  }
-  @keyframes visible {
-    0% {
-      transform: translateY(10%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0%);
-      opacity: 1;
     }
   }
 }

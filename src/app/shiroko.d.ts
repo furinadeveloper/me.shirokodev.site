@@ -64,3 +64,11 @@ type a = {
     };
   };
 };
+
+type navType = {
+  query: string;
+  name: string;
+  desc: string;
+  src: string;
+  color: string;
+};

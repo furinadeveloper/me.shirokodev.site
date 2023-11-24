@@ -27,7 +27,7 @@ export default function Nav({
               });
             }}
             className={`${
-              item.query === tab ? "z-10" : "cursor-pointer bg-light-main-100 dark:bg-dark-main-100"
+              item.query === tab ? "z-10" : "cursor-pointer bg-dark-main-100"
             } flex fade-in relative gap-2 rounded-md overflow-hidden items-center px-2 py-[2px]`}
           >
             <span>{item.name}</span>

@@ -36,7 +36,7 @@ export default function VSCode({ presence }: { presence: undefined | presenceTyp
     <div
       className={`${
         presence?.activity ? "flex" : "hidden"
-      } shadow-main bg-light-main-100 dark:bg-dark-main-100 text-sm sm:text-md rounded-lg overflow-hidden`}
+      } shadow-main bg-dark-main-100 text-sm sm:text-md rounded-lg overflow-hidden`}
     >
       <Image
         src={presence?.activity?.assets?.largeImage || "/avatar.webp"}
