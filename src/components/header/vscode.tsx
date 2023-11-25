@@ -1,36 +1,27 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
-export default function VSCode({ presence }: { presence: undefined | presenceType }) {
-  const [timeStamp, setTimeStamp] = useState<null | string>(null);
+import avatar from "@/images/avatar.webp";
+export default function VSCode({ presence, timestamp }: { presence: undefined | presenceType; timestamp: number }) {
+  const [currentElapsed, setCurrentElapsed] = useState<string>("");
 
   useEffect(() => {
-    if (presence?.activity?.createdTimestamp) {
-      const timeStamp = presence.activity.createdTimestamp;
-      let seconds = Math.floor((timeStamp / 1000) % 60);
-      let minutes = Math.floor((timeStamp / 1000 / 60) % 60);
-      let hours = Math.floor((timeStamp / 1000 / 60 / 60) % 24);
-      const interval = setInterval(() => {
-        seconds++;
-        if (seconds >= 60) {
-          seconds = 0;
-          minutes++;
-          if (minutes >= 60) {
-            minutes = 0;
-            hours++;
-          }
-        }
-        const formattedTime = [
-          hours.toString().padStart(2, "0"),
-          minutes.toString().padStart(2, "0"),
-          seconds.toString().padStart(2, "0"),
-        ].join(":");
-        setTimeStamp(`Elapsed: ${formattedTime}`);
+    if (timestamp) {
+      const timeoutId = setInterval(() => {
+        const elapsed = Date.now() - timestamp;
+        const hours = Math.floor(elapsed / 1000 / 60 / 60)
+          .toString()
+          .padStart(2, "0");
+        const minutes = (Math.floor(elapsed / 1000 / 60) % 60).toString().padStart(2, "0");
+        const seconds = (Math.floor(elapsed / 1000) % 60).toString().padStart(2, "0");
+
+        setCurrentElapsed(`${hours}:${minutes}:${seconds}`);
       }, 1000);
+
       return () => {
-        clearInterval(interval);
+        clearInterval(timeoutId);
       };
     }
-  }, [presence]);
+  }, [timestamp]);
 
   return (
     <div
@@ -39,7 +30,7 @@ export default function VSCode({ presence }: { presence: undefined | presenceTyp
       } shadow-main bg-dark-main-100 text-sm sm:text-md rounded-lg overflow-hidden`}
     >
       <Image
-        src={presence?.activity?.assets?.largeImage || "/avatar.webp"}
+        src={presence?.activity?.assets?.largeImage || avatar}
         width="0"
         height="0"
         sizes="100vw"
@@ -47,12 +38,10 @@ export default function VSCode({ presence }: { presence: undefined | presenceTyp
         alt={presence?.activity?.assets?.largeText || ""}
       />
       <div className="pl-3 my-auto">
-        <div className="text-md sm:text-lg">
-          {presence?.activity?.name || ""}
-        </div>
+        <div className="text-md sm:text-lg">{presence?.activity?.name || ""}</div>
         <div>{presence?.activity?.state || ""}</div>
         <div>{presence?.activity?.details}</div>
-        <div>{timeStamp}</div>
+        <div>Elapsed: {currentElapsed}</div>
       </div>
     </div>
   );

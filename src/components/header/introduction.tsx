@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { DiscordIcon, FacebookIcon, GithubIcon, GmailIcon } from "@/resources/social";
 import { useEffect, useState } from "react";
-import { BestTechnology, Infomation, SocialMediaLink, Team } from "@/resources/author";
+import { Infomation, SocialMediaLink } from "@/resources/author";
 
 export default function Introduction() {
   const [age, setAge] = useState<string>("");
@@ -17,7 +17,7 @@ export default function Introduction() {
     const totalMonthLearning = nowMonth - Infomation.startCoding.month;
     const totalYearLearning = nowYear - Infomation.startCoding.year;
 
-    const fullAge = nowYear - Infomation.born;
+    const fullAge = nowYear - 2007;
     setAge(`${Math.floor(fullAge / 10)}${Number(String(fullAge).slice(1)) >= 5 ? "X" : "x"}`);
 
     if (totalYearLearning * 12 + totalMonthLearning < 12) {
@@ -29,16 +29,12 @@ export default function Introduction() {
 
   return (
     <>
-      <p className="my-2 text-lg">
-        ● Hi there, I&apos;m {Infomation.shortname} - a normal {Infomation.job} love programming.
-      </p>
+      <p className="my-2 text-lg">● Hi there, I&apos;m Shiroko - a normal student love programming.</p>
       <p className="mb-2 text-lg">
         ● I&apos;m {age} years old and have been studying it for {beginTime}.
       </p>
-      <p className="mb-2 text-lg">● Front-end Developer from {Team.name}.</p>
-      <p className="mb-2 text-lg">
-        ● Experienced with {BestTechnology.framework.name} and {BestTechnology.system.name} System.
-      </p>
+      <p className="mb-2 text-lg">● Front-end Developer from Elaina Team.</p>
+      <p className="mb-2 text-lg">● Experienced with Next.JS and Linux System.</p>
       <div className="flex w-full gap-3">
         <span>
           ● Contact me at <span className="hidden md:inline-block">(☞ﾟヮﾟ)☞</span>
@@ -63,11 +59,8 @@ export default function Introduction() {
         ].map((item, index) => {
           const Icon = item.icon;
           return (
-            <Link href={item.link} target="_blank" rel="nooponer noreferrer" key={index}>
-              <Icon
-                aria-label={item.name}
-                className="fill-[#fff] hover:!fill-[#67e8f9] transition-colors"
-              />
+            <Link tabIndex={-1} href={item.link} target="_blank" rel="nooponer noreferrer" key={index}>
+              <Icon aria-label={item.name} className="fill-[#fff] hover:!fill-[#67e8f9] transition-colors" />
             </Link>
           );
         })}

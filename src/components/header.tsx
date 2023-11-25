@@ -1,22 +1,40 @@
 "use client";
-import { useEffect, useState } from "react";
-import { SocketURL } from "@/resources/presence-socket";
+import { lazy, useEffect, useState } from "react";
 import Avatar from "./header/avatar";
-import VSCode from "./header/vscode";
 import Introduction from "./header/introduction";
 import AuthorState from "./header/author-state";
 
+const VSCode = lazy(() => import("./header/vscode"));
+
 export default function Header() {
   const [presence, setPresence] = useState<undefined | presenceType>(undefined);
+  const [timestamp, setTimestamp] = useState<number>(0)
 
   useEffect(() => {
-    (function handleSocket() {
-      const ws = new WebSocket(SocketURL);
-      ws.addEventListener("open", () => console.log(`[Noti] Socket Connnected!`));
-      ws.addEventListener("error", () => ws.close());
-      ws.addEventListener("close", () => setTimeout(handleSocket, 1000));
-      ws.addEventListener("message", async ({ data }: { data: string }) => setPresence(JSON.parse(data)));
-    })();
+    const websocket = new WebSocket("wss://gateway.misonomika.site");
+    console.log(`[gateway.misonomika.site]: Gateway connecting...`);
+
+    websocket.addEventListener(
+      "open",
+      () => {
+        console.log(`[gateway.misonomika.site]: Gateway connected.`);
+      },
+      { once: true }
+    );
+
+    websocket.addEventListener(
+      "close",
+      () => {
+        console.log(`[gateway.misonomika.site]: Gateway disconnected.`);
+      },
+      { once: true }
+    );
+
+    websocket.addEventListener("message", (event) => {
+      const data = JSON.parse(event.data);
+      setTimestamp(data.activity?.timestamps?.start);
+      setPresence(data);
+    });
   }, []);
 
   return (
@@ -26,7 +44,7 @@ export default function Header() {
           <AuthorState presence={presence} />
           <Introduction />
         </div>
-        <VSCode presence={presence} />
+        <VSCode presence={presence} timestamp={timestamp} />
       </div>
       <div className="flex flex-1">
         <Avatar presence={presence} />

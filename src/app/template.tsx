@@ -5,9 +5,9 @@ const font = Fira_Code({ subsets: ["latin"] });
 
 export default function Home({ children }: { children: React.ReactNode }) {
   return (
-    <body suppressHydrationWarning className={`${font.className} bg-[#f8fafc] dark:bg-[#000]`}>
-        {children}
-        <Noti />
+    <body className={`${font.className} bg-black`}>
+      {children}
+      <Noti />
     </body>
   );
 }

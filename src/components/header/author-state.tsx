@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import { MapIcon } from "@/resources/etc";
 import HelloIcon from "@/svgs/hello.svg";
 import { useRef, useEffect } from "react";
 import { ColorState } from "@/resources/color";
-import { Infomation } from "@/resources/author";
+import VNFlag from "@/svgs/vietnam-flag.svg";
+
 export default function AuthorState({ presence }: { presence: undefined | presenceType }) {
   const statusIconRef = useRef<null | HTMLSpanElement>(null);
 
@@ -34,7 +34,7 @@ export default function AuthorState({ presence }: { presence: undefined | presen
   return (
     <>
       <div className="mb-1">
-        <span className="font-bold text-lg sm:text-xl md:text-4xl">{Infomation.nickname}</span>
+        <span className="font-bold text-lg sm:text-xl md:text-4xl">Sunaookami Shiroko</span>
         <Image
           src={HelloIcon}
           alt="Hello Icon"
@@ -51,10 +51,10 @@ export default function AuthorState({ presence }: { presence: undefined | presen
         <div className="flex">
           <MapIcon className="fill-[#fff] my-auto mr-2" />
           <span className="mr-2">
-            {Infomation.address.province} / {Infomation.address.country}
+            Khanh Hoa / Viet Nam
           </span>
           <Image
-            src={Infomation.address.flag}
+            src={VNFlag}
             alt="Viet Nam Flag"
             width="0"
             height="0"

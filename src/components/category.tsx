@@ -1,15 +1,14 @@
 import { Recursive } from "next/font/google";
-import Nav from "./category/nav";
-import Projects from "./category/tabs/projects";
 import Underline from "@/resources/underline";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { lazy, useState } from "react";
 import { nav } from "@/resources/nav";
-import Technology from "./category/tabs/technology";
-import Animes from "./category/tabs/animes";
-import TabLoading from "./loadings/tab.loading";
-import CardLoading from "./loadings/card.loading";
-import TextLoading from "./loadings/text.loading";
+import Events from "./category/tabs/events";
+
+const Nav = lazy(() => import("./category/nav"));
+const Projects = lazy(() => import("./category/tabs/projects"));
+const Technology = lazy(() => import("./category/tabs/technology"));
+const Animes = lazy(() => import("./category/tabs/animes"));
 
 const font = Recursive({ subsets: ["latin"] });
 
@@ -36,9 +35,10 @@ export default function Category() {
           })}
           <Underline className="absolute left-8 top-4 w-40" />
         </div>
-        <Suspense fallback={<CardLoading />}>{tab === "projects" && <Projects font={font} />}</Suspense>
-        <Suspense fallback={<TextLoading />}>{tab === "technology" && <Technology font={font} />}</Suspense>
-        <Suspense fallback={<TabLoading />}>{tab === "animes" && <Animes font={font} />}</Suspense>
+        {tab === "projects" && <Projects font={font} />}
+        {tab === "technology" && <Technology font={font} />}
+        {tab === "events" && <Events font={font} />}
+        {tab === "animes" && <Animes font={font} />}
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
 export default function CardLoading() {
   return (
-    <div className="max-w-sm p-4 border rounded shadow animate-pulse md:p-6 border-gray-700">
-      <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-700">
+    <div className="w-full p-4 border rounded shadow animate-pulse md:p-6 border-dark-main-100">
+      <div className="flex items-center justify-center h-80 mb-4 rounded bg-dark-main-200">
         <svg
-          className="w-10 h-10 text-gray-600"
+          className="w-10 h-10"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -13,10 +13,10 @@ export default function CardLoading() {
           <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
         </svg>
       </div>
-      <div className="h-2.5 rounded-full bg-gray-700 w-48 mb-4"></div>
-      <div className="h-2 rounded-full bg-gray-700 mb-2.5"></div>
-      <div className="h-2 rounded-full bg-gray-700 mb-2.5"></div>
-      <div className="h-2 rounded-full bg-gray-700"></div>
+      <div className="h-2.5 rounded-full bg-dark-main-200 w-48 mb-4"></div>
+      <div className="h-2 rounded-full bg-dark-main-200 mb-2.5"></div>
+      <div className="h-2 rounded-full bg-dark-main-200 mb-2.5"></div>
+      <div className="h-2 rounded-full bg-dark-main-200"></div>
       <span className="sr-only">Loading...</span>
     </div>
   );

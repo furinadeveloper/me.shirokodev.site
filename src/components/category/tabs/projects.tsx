@@ -6,9 +6,19 @@ import forks from "@/svgs/forks.svg";
 import nextjs from "@/svgs/nextjs.svg";
 import tailwindcss from "@/svgs/tailwind.svg";
 import { NextFont } from "next/dist/compiled/@next/font";
+
+const ACCESS_KEY = "57RmFbpmx99yig";
+const HEIGHT = "680";
+const DEVICE_SCALE_FACTOR = 1;
+const FORMAT = "webp";
+const BLOCK_ADS = true;
+const BLOCK_COOKIE_BANNERS = true;
+const BLOCK_TRACKERS = true;
+const CACHE = false;
+
 export default function Projects({ font }: { font?: NextFont }) {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+    <section className="fade-in grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
       {[
         {
           name: "shirokodev.site",
@@ -21,7 +31,7 @@ export default function Projects({ font }: { font?: NextFont }) {
             stars: 0,
             watching: 0,
           },
-          pic: "https://api.screenshotone.com/take?access_key=57RmFbpmx99yig&url=https%3A%2F%2Fshirokodev.site&viewport_height=680&device_scale_factor=1&format=webp&block_ads=true&block_cookie_banners=true&block_trackers=true&cache=false",
+          pic: `https://api.screenshotone.com/take?access_key=${ACCESS_KEY}&url=https%3A%2F%2Fshirokodev.site&viewport_height=${HEIGHT}&device_scale_factor=${DEVICE_SCALE_FACTOR}&format=${FORMAT}&block_ads=${BLOCK_ADS}&block_cookie_banners=${BLOCK_COOKIE_BANNERS}&block_trackers=${BLOCK_TRACKERS}&cache=${CACHE}`,
         },
         {
           name: "profile.shirokodev.site",
@@ -34,13 +44,13 @@ export default function Projects({ font }: { font?: NextFont }) {
             stars: 0,
             watching: 0,
           },
-          pic: "https://api.screenshotone.com/take?access_key=57RmFbpmx99yig&url=https%3A%2F%2Fprofile.shirokodev.site&viewport_height=680&device_scale_factor=1&format=webp&block_ads=true&block_cookie_banners=true&block_trackers=true&cache=false",
+          pic: `https://api.screenshotone.com/take?access_key=${ACCESS_KEY}&url=https%3A%2F%2Fprofile.shirokodev.site&viewport_height=${HEIGHT}&device_scale_factor=${DEVICE_SCALE_FACTOR}&format=${FORMAT}&block_ads=${BLOCK_ADS}&block_cookie_banners=${BLOCK_COOKIE_BANNERS}&block_trackers=${BLOCK_TRACKERS}&cache=${CACHE}`,
         },
       ].map((item, index) => {
         return (
           <div
             key={index}
-            className="group fade-in p-3 div-layout border rounded-md h-96  transition-transform hover:-translate-y-2"
+            className="group fade-in p-3 div-layout border rounded-md h-96 transition-transform hover:-translate-y-2"
           >
             <Image
               src={item.pic}

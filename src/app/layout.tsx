@@ -1,5 +1,7 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from "next";
+import "./globals.css";
+import { config } from "dotenv";
+config();
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://profile.shirokodev.site/"),
@@ -14,9 +16,9 @@ export const metadata: Metadata = {
   keywords: ["Shiroko", "Shiroko Dev", "Sunaookami Shiroko", "Personal Website", "Personal Portfolio", "Profile"],
   referrer: "origin-when-cross-origin",
   verification: {
-    google: "0OtymWYNjcT0a_R2_ULRMuZrJa1-ZJmd-o8QWTDV64k",
+    google: String(process.env.GOOGLE_KEY),
     other: {
-      "dmca-site-verification": "TE9xajJCR2V2d2tsVVhMRUZ2SWdwdz090",
+      "dmca-site-verification": String(process.env.DMCA_KEY),
     },
   },
   publisher: "Sunaookami Shiroko",
@@ -50,14 +52,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html suppressHydrationWarning translate='no' lang="en">
+    <html suppressHydrationWarning translate="no" lang="en">
       {children}
     </html>
-  )
+  );
 }

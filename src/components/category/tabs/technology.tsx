@@ -10,13 +10,13 @@ import Bootstrap from "@/svgs/bootstrap.svg";
 import CloudFlare from "@/svgs/cloudflare.svg";
 import Github from "@/svgs/github.svg";
 import Linux from "@/svgs/linux.svg";
-import Windows from "@/images/windows.png";
+import Windows from "@/images/technologies/windows.png";
 import VSCode from "@/svgs/vscode.svg";
 import Image from "next/image";
 
 export default function Technology({ font }: { font: NextFont }) {
   return (
-    <section className={`${font.className} flex flex-wrap gap-4 div-layout rounded-md p-4`}>
+    <section className={`${font.className} fade-in flex flex-wrap gap-4 div-layout rounded-md p-4`}>
       {[
         {
           name: "HTML",

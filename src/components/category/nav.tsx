@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useTransition } from "react";
 
 export default function Nav({
   nav,
@@ -13,6 +13,7 @@ export default function Nav({
   setTab: Dispatch<SetStateAction<string | null>>;
 }) {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   return (
     <nav className="fade-in flex min-h-[28px] select-none flex-wrap gap-4 font-bold">
@@ -21,9 +22,11 @@ export default function Nav({
           <div
             key={index}
             onClick={() => {
-              setTab(item.query);
-              router.push(`?tab=${item.query}`, {
-                scroll: false,
+              startTransition(() => {
+                setTab(item.query);
+                router.push(`?tab=${item.query}`, {
+                  scroll: false,
+                });
               });
             }}
             className={`${
