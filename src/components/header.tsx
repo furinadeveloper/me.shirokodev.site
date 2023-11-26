@@ -38,8 +38,8 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="box-layout flex min-h-screen flex-col lg:flex-row gap-10">
-      <div className="flex flex-col gap-5 lg:gap-0 justify-between">
+    <header className="box-layout flex flex-col lg:flex-row gap-10">
+      <div className="flex basis-[60%] flex-col gap-5 justify-between">
         <div className="flex flex-col">
           <AuthorState presence={presence} />
           <Introduction />

@@ -2,11 +2,15 @@
 import Link from "next/link";
 import { DiscordIcon, FacebookIcon, GithubIcon, GmailIcon } from "@/resources/social";
 import { useEffect, useState } from "react";
-import { Infomation, SocialMediaLink } from "@/resources/author";
 
 export default function Introduction() {
   const [age, setAge] = useState<string>("");
   const [beginTime, setBeginTime] = useState<string>("");
+
+  const startTime = {
+    month: 7,
+    year: 2023,
+  };
 
   useEffect(() => {
     const now = new Date();
@@ -14,8 +18,8 @@ export default function Introduction() {
     const nowYear = now.getFullYear();
     const nowMonth = now.getMonth() + 1;
 
-    const totalMonthLearning = nowMonth - Infomation.startCoding.month;
-    const totalYearLearning = nowYear - Infomation.startCoding.year;
+    const totalMonthLearning = nowMonth - startTime.month;
+    const totalYearLearning = nowYear - startTime.year;
 
     const fullAge = nowYear - 2007;
     setAge(`${Math.floor(fullAge / 10)}${Number(String(fullAge).slice(1)) >= 5 ? "X" : "x"}`);
@@ -25,7 +29,7 @@ export default function Introduction() {
     } else {
       setBeginTime(`${totalYearLearning} ${totalYearLearning === 1 ? "year" : "years"}`);
     }
-  }, []);
+  }, [startTime.month, startTime.year]);
 
   return (
     <>
@@ -40,20 +44,20 @@ export default function Introduction() {
           ● Contact me at <span className="hidden md:inline-block">(☞ﾟヮﾟ)☞</span>
         </span>
         {[
-          { name: "Github", link: SocialMediaLink.github, icon: GithubIcon },
+          { name: "Github", link: "https://github.com/sunaookamishirokodev", icon: GithubIcon },
           {
             name: "Facebook",
-            link: SocialMediaLink.facebook,
+            link: "https://www.facebook.com/sunaookamishirokodev",
             icon: FacebookIcon,
           },
           {
             name: "Gmail",
-            link: `mailto:${SocialMediaLink.gmail}`,
+            link: `mailto:me@shirokodev.site`,
             icon: GmailIcon,
           },
           {
             name: "Discord",
-            link: SocialMediaLink.discord,
+            link: "https://discord.com/users/962375717465763961",
             icon: DiscordIcon,
           },
         ].map((item, index) => {

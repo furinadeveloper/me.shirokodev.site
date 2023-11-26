@@ -9,12 +9,12 @@ export default function Avatar({ presence }: { presence: undefined | presenceTyp
 
   useEffect(() => {
     setAudio(new Audio());
-    if (audio) audio.loop = true;
   }, []);
 
   useEffect(() => {
     if (audio && !audio.src) {
       audio.src = BlueArchiveURL;
+      audio.loop = true;
       console.log(`[Noti] Music loaded! You can click my avatar to play it:3`);
     }
   }, [audio]);

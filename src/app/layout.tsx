@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     countryName: "Vietnam",
     images: [
       {
-        url: "/avatar.webp",
+        url: "/seo.gif",
         alt: "Shiroko Background SEO",
       },
     ],
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     description: "Hey guys! Welcome to my website:3",
     site: "profile.shirokodev.site",
     creator: "@shirokoxdev",
-    images: "/avatar.webp",
+    images: "/seo.gif",
   },
 };
 

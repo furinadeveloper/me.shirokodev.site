@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { MapIcon } from "@/resources/etc";
 import HelloIcon from "@/svgs/hello.svg";
 import { useRef, useEffect } from "react";
 import { ColorState } from "@/resources/color";
 import VNFlag from "@/svgs/vietnam-flag.svg";
+import Map from "@/svgs/map.svg";
 
 export default function AuthorState({ presence }: { presence: undefined | presenceType }) {
   const statusIconRef = useRef<null | HTMLSpanElement>(null);
@@ -49,17 +49,9 @@ export default function AuthorState({ presence }: { presence: undefined | presen
           <span className="mr-4">currently {presence?.user?.status?.type || "offline"}</span>
         </div>
         <div className="flex">
-          <MapIcon className="fill-[#fff] my-auto mr-2" />
-          <span className="mr-2">
-            Khanh Hoa / Viet Nam
-          </span>
-          <Image
-            src={VNFlag}
-            alt="Viet Nam Flag"
-            width="0"
-            height="0"
-            className="w-5 aspect-square h-auto"
-          />
+          <Image src={Map} alt="" height={16} width={16} className="my-auto mr-2" />
+          <span className="mr-2">Khanh Hoa / Viet Nam</span>
+          <Image src={VNFlag} alt="Viet Nam Flag" width="0" height="0" className="w-5 aspect-square h-auto" />
         </div>
       </div>
     </>

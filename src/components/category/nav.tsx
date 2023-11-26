@@ -2,6 +2,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useTransition } from "react";
+import { useInView } from "react-intersection-observer";
 
 export default function Nav({
   nav,
@@ -14,44 +15,51 @@ export default function Nav({
 }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const { ref, inView } = useInView({ delay: 500, triggerOnce: true });
 
   return (
-    <nav className="fade-in flex min-h-[28px] select-none flex-wrap gap-4 font-bold">
-      {nav.map((item, index) => {
-        return (
-          <div
-            key={index}
-            onClick={() => {
-              startTransition(() => {
-                setTab(item.query);
-                router.push(`?tab=${item.query}`, {
-                  scroll: false,
+    <nav ref={ref} className="relative h-16 overflow-y-hidden overflow-x-scroll">
+      <div
+        className={`flex absolute left-0 top-0 w-full select-none gap-4 font-bold ${inView ? "fade-in" : "opacity-0"}`}
+      >
+        {nav.map(({ name, query, color, src }, index) => {
+          return (
+            <motion.li
+              onClick={() => {
+                startTransition(() => {
+                  setTab(query);
+                  router.push(`?tab=${query}`, {
+                    scroll: false,
+                  });
                 });
-              });
-            }}
-            className={`${
-              item.query === tab ? "z-10" : "cursor-pointer bg-dark-main-100"
-            } flex fade-in relative gap-2 rounded-md overflow-hidden items-center px-2 py-[2px]`}
-          >
-            <span>{item.name}</span>
-            <Image
-              src={item.src}
-              width={0}
-              height={0}
-              className="w-5 aspect-square select-none drag-none"
-              alt={`${item.name} Icon`}
-            />
-            {item.query === tab && (
-              <motion.div
-                className="absolute left-0 top-0 z-10 h-full w-full"
-                layoutId="page"
-                animate={{ backgroundColor: item.color }}
-                transition={{ type: "spring", duration: 0.4 }}
-              />
-            )}
-          </div>
-        );
-      })}
+              }}
+              style={{ backgroundColor: color }}
+              className={`relative flex cursor-pointer gap-2 p-3 rounded-full opacity-30 hover:opacity-100 transition-[opacity] ${
+                tab === query && "!opacity-100"
+              }`}
+              key={index}
+              initial={{ y: -100 }}
+              animate={{ y: 0 }}
+            >
+              <div className="flex">{name}</div>
+              <div className="w-4 flex">
+                <Image src={src} style={{width: "100%", height: "auto"}} alt={`${name} Icon`} className="my-auto" />
+              </div>
+              {query === tab && (
+                <motion.span
+                  className={`rounded-full absolute inset-0 -z-10 bg-white/50`}
+                  layoutId="activeSection"
+                  transition={{
+                    type: "spring",
+                    stiffness: 380,
+                    damping: 30,
+                  }}
+                ></motion.span>
+              )}
+            </motion.li>
+          );
+        })}
+      </div>
     </nav>
   );
 }

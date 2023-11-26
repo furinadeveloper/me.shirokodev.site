@@ -1,109 +1,91 @@
-import Link from "next/link";
+"use client";
+
+import Nextjs from "@/svgs/app/nextjs.svg";
+import Tailwindcss from "@/svgs/app/tailwind.svg";
+import Motion from "@/svgs/app/motion.svg";
 import Image from "next/image";
-import watching from "@/svgs/watching.svg";
-import stars from "@/svgs/stars.svg";
-import forks from "@/svgs/forks.svg";
-import nextjs from "@/svgs/nextjs.svg";
-import tailwindcss from "@/svgs/tailwind.svg";
-import { NextFont } from "next/dist/compiled/@next/font";
+import profileImage from "@/images/projects/profile.png";
+import homepageImage from "@/images/projects/homepage.png";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Link from "next/link";
+import { useInView } from "react-intersection-observer";
 
-const ACCESS_KEY = "57RmFbpmx99yig";
-const HEIGHT = "680";
-const DEVICE_SCALE_FACTOR = 1;
-const FORMAT = "webp";
-const BLOCK_ADS = true;
-const BLOCK_COOKIE_BANNERS = true;
-const BLOCK_TRACKERS = true;
-const CACHE = false;
-
-export default function Projects({ font }: { font?: NextFont }) {
+export default function Projects() {
+  const { ref, inView } = useInView({ delay: 1000, triggerOnce: true });
   return (
-    <section className="fade-in grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
-      {[
-        {
-          name: "shirokodev.site",
-          link: "https://shirokodev.site",
-          repo: "https://github.com/sunaookamishirokodev/shirokodev.site",
-          framework: [nextjs, tailwindcss],
-          desc: "My home page:3",
-          state: {
-            forks: 0,
-            stars: 0,
-            watching: 0,
-          },
-          pic: `https://api.screenshotone.com/take?access_key=${ACCESS_KEY}&url=https%3A%2F%2Fshirokodev.site&viewport_height=${HEIGHT}&device_scale_factor=${DEVICE_SCALE_FACTOR}&format=${FORMAT}&block_ads=${BLOCK_ADS}&block_cookie_banners=${BLOCK_COOKIE_BANNERS}&block_trackers=${BLOCK_TRACKERS}&cache=${CACHE}`,
-        },
-        {
-          name: "profile.shirokodev.site",
-          link: "https://profile.shirokodev.site",
-          repo: "https://github.com/sunaookamishirokodev/profile.shirokodev.site",
-          framework: [nextjs, tailwindcss],
-          desc: "My personal portfolio website:>",
-          state: {
-            forks: 0,
-            stars: 0,
-            watching: 0,
-          },
-          pic: `https://api.screenshotone.com/take?access_key=${ACCESS_KEY}&url=https%3A%2F%2Fprofile.shirokodev.site&viewport_height=${HEIGHT}&device_scale_factor=${DEVICE_SCALE_FACTOR}&format=${FORMAT}&block_ads=${BLOCK_ADS}&block_cookie_banners=${BLOCK_COOKIE_BANNERS}&block_trackers=${BLOCK_TRACKERS}&cache=${CACHE}`,
-        },
-      ].map((item, index) => {
-        return (
-          <div
-            key={index}
-            className="group fade-in p-3 div-layout border rounded-md h-96 transition-transform hover:-translate-y-2"
-          >
-            <Image
-              src={item.pic}
-              alt={`Screen shot of project: ${item.name}`}
-              priority
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="w-full h-auto rounded-md"
-            />
-            <div className={`${font?.className} mt-3`}>
-              <Link
-                href={item.link}
-                target="_blank"
-                rel="noopenner noreferrer"
-                className="block mb-2 text-xl underline-offset-2 hover:underline"
-              >
-                {item.name}
-              </Link>
-              <div className="flex justify-between border-b border-[#292524] pb-2">
-                <div className="flex gap-2 select-none">
-                  {item.framework.map((item, index) => {
-                    return (
-                      <Image
-                        src={item}
-                        key={index}
-                        alt={""}
-                        style={{ width: "20px", height: "auto" }}
-                        className="opacity-50 hover:opacity-100"
-                      />
-                    );
-                  })}
-                </div>
-                <div className="flex gap-2">
-                  <div className="flex gap-1">
-                    <Image src={watching} alt="Watching counter" width={0} height={0} className="w-5 h-auto my-auto" />
-                    {item.state.watching}
-                  </div>
-                  <div className="flex gap-1">
-                    <Image src={stars} alt="Stars counter" width={0} height={0} className="w-5 h-auto my-auto" />
-                    {item.state.stars}
-                  </div>
-                  <div className="flex gap-1">
-                    <Image src={forks} alt="Forks counter" width={0} height={0} className="w-5 h-auto my-auto" />
-                    {item.state.forks}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p className="text-ellipsis overflow-hidden mt-2 opacity-50">{item.desc}</p>
-          </div>
-        );
-      })}
+    <section ref={ref} className={`grid gap-4 grid-cols-1 lg:grid-cols-2 ${inView ? "fade-in" : "opacity-0"}`}>
+      <Project
+        title="shirokodev.site"
+        desc="My home page website:3"
+        img={homepageImage}
+        link="https://shirokodev.site"
+        repo="https://github.com/sunaookamishirokodev"
+        use={[Nextjs, Tailwindcss]}
+      />
+      <Project
+        title="profile.shirokodev.site"
+        desc="My portfolio website:>"
+        img={profileImage}
+        link="https://profile.shirokodev.site"
+        repo="https://github.com/sunaookamishirokodev/profile.shirokodev.site"
+        use={[Nextjs, Tailwindcss, Motion]}
+      />
     </section>
+  );
+}
+
+function Project({
+  title,
+  desc,
+  img,
+  link,
+  repo,
+  use,
+}: {
+  title: string;
+  desc: string;
+  img: any;
+  link: string;
+  repo: string;
+  use: StaticImport[];
+}) {
+  return (
+    <div className="group mb-3 sm:mb-8 last:mb-0">
+      <section className="overflow-hidden sm:pr-8 relative sm:h-[20rem] transition div-layout hover:bg-white/10">
+        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 flex flex-col gap-2 h-full">
+          <Link href={link} target="_blank" className="text-2xl font-semibold">
+            {title}
+          </Link>
+          <p className="leading-relaxed text-white/70">{desc}</p>
+          <ul className="flex flex-wrap mt-auto gap-2">
+            {use.map((tag, index) => (
+              <Image
+                key={index}
+                src={tag}
+                alt=""
+                className="opacity-30 hover:opacity-100"
+                style={{ width: "30px", height: "auto" }}
+              />
+            ))}
+          </ul>
+          <Link href={repo} rel="noopener noreferrer" className="text-white/70 hover:text-white">
+            Source code - read if cute
+          </Link>
+        </div>
+
+        <Link
+          href={link}
+          className="absolute hidden sm:block top-8 left-[60%] w-[28.25rem] shadow-2xl
+        transition 
+        group-hover:scale-[1.04]
+        group-hover:-translate-x-3
+        group-hover:translate-y-3
+        group-hover:-rotate-2"
+          target="_blank"
+        >
+          <Image src={img} alt="" width={0} height={0} quality={95} className="rounded-l-md" />
+        </Link>
+      </section>
+    </div>
   );
 }

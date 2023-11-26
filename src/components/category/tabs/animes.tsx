@@ -11,10 +11,11 @@ import OshinoKo from "@/images/animes/OshinoKo.jpg";
 import SeishunButa from "@/images/animes/SeishunButa.jpg";
 import ReZero from "@/images/animes/Re_Zero.jpg";
 import LycorisRecoil from "@/images/animes/LycorisRecoil.jpg";
-import { NextFont } from "next/dist/compiled/@next/font";
-export default function Animes({ font }: { font: NextFont }) {
+import { useInView } from "react-intersection-observer";
+export default function Animes() {
+  const { ref, inView } = useInView({ triggerOnce: true, delay: 1000 });
   return (
-    <section className={`${font.className} fade-in mt-10 max-w-[896px]`}>
+    <section ref={ref} className={`grid grid-cols-1 lg:grid-cols-2 gap-4 ${inView ? "fade-in" : "opacity-0"}`}>
       {[
         {
           name: "Sword Art Online: Alicization",
@@ -82,13 +83,13 @@ export default function Animes({ font }: { font: NextFont }) {
           image: LycorisRecoil,
           url: "https://anilist.co/anime/143270/Lycoris-Recoil/",
         },
-      ].map(({ name, description, image, url }, i) => (
+      ].map(({ name, description, image, url }, index) => (
         <Link
-          key={i}
+          key={index}
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative mb-4 flex h-48 items-center justify-items-start overflow-hidden rounded-lg px-4 before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-0 before:transition before:duration-150 hover:before:opacity-50 sm:px-8"
+          className="group relative flex h-48 overflow-hidden rounded-lg px-4 before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-0 before:transition before:duration-150 hover:before:opacity-50 sm:px-8"
         >
           <Image
             src={image}
@@ -97,9 +98,9 @@ export default function Animes({ font }: { font: NextFont }) {
             height={240}
             className="absolute left-0 top-0 h-full w-full rounded-lg object-cover transition duration-150 group-hover:scale-[1.02]"
           />
-          <div className="z-20 w-full scale-95 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100">
+          <div className="z-20 w-full my-auto scale-95 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100">
             <h3 className="text-3xl font-bold">
-              <span className="text-stone-300">{i + 1} </span>
+              <span className="text-stone-300">{index + 1} </span>
               {name}
             </h3>
             <p className="text-lg text-stone-200"># {description}</p>

@@ -31,8 +31,8 @@ export default function VSCode({ presence, timestamp }: { presence: undefined | 
     >
       <Image
         src={presence?.activity?.assets?.largeImage || avatar}
-        width="0"
-        height="0"
+        width={0}
+        height={0}
         sizes="100vw"
         className="w-[128px] aspect-square"
         alt={presence?.activity?.assets?.largeText || ""}
