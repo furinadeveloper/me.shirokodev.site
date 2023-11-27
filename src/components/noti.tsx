@@ -1,7 +1,7 @@
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, ToastOptions, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const notify = (message: string) => toast(message);
+export const notify = (message: string, option?: ToastOptions) => toast(message, option);
 
 export default function Noti() {
   return (
@@ -15,7 +15,7 @@ export default function Noti() {
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme={"dark"}
+      theme={"light"}
     />
   );
 }

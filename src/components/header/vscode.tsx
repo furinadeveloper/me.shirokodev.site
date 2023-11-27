@@ -27,7 +27,7 @@ export default function VSCode({ presence, timestamp }: { presence: undefined | 
     <div
       className={`${
         presence?.activity ? "flex" : "hidden"
-      } shadow-main bg-dark-main-100 text-sm sm:text-md rounded-lg overflow-hidden`}
+      } div-layout text-sm sm:text-md overflow-hidden`}
     >
       <Image
         src={presence?.activity?.assets?.largeImage || avatar}

@@ -1,4 +1,3 @@
-"use client";
 import Noti from "@/components/noti";
 import { Fira_Code } from "next/font/google";
 const font = Fira_Code({ subsets: ["latin"] });

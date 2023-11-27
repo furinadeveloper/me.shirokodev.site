@@ -37,34 +37,6 @@ type presenceType = {
   };
 };
 
-type a = {
-  user?: {
-    displayName?: string;
-    userName?: string;
-    avatar?: string;
-    status?: {
-      devices?: {
-        mobile?: "online" | "offline";
-        desktop?: "online" | "offline";
-      };
-      state?: "idle" | "dnd" | "online" | "offline";
-    };
-  };
-  activity?: {
-    largeImage?: string;
-    smallImage?: string;
-    alt?: string;
-    app?: string;
-    state?: string;
-    detail?: string;
-    time?: {
-      start?: number | null;
-      elapsed?: number | null;
-      end?: number | null;
-    };
-  };
-};
-
 type navType = {
   query: string;
   name: string;

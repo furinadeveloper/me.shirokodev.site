@@ -22,7 +22,7 @@ export default function Experience() {
           {
             title: "Dating with Chloe",
             location: "Viet Nam",
-            description: "After about a month of getting to know her, we decided to date her.",
+            description: "After about a month of getting to know her, I decided to date her.",
             icon: createElement(FaHeart),
             img: chloe,
             date: "28/1/2023 - present",

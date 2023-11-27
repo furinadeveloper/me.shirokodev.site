@@ -7,7 +7,7 @@
 }
 
 .wheel,
-.hamster,
+.hamster,z
 .hamster div,
 .spoke {
   position: absolute;
