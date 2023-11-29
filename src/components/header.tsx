@@ -3,35 +3,41 @@ import { lazy, useEffect, useState } from "react";
 import Avatar from "./header/avatar";
 import Introduction from "./header/introduction";
 import AuthorState from "./header/author-state";
+import { io } from "socket.io-client";
 
 const VSCode = lazy(() => import("./header/vscode"));
 
+const socket = io("wss://gateway.shirokodev.site");
+function sendIdentify(): Promise<{
+  error: string;
+  data: string;
+  msg: string;
+}> {
+  return new Promise((resolve) => {
+    socket.once("identifyResult", (data) => {
+      data = JSON.parse(data);
+      resolve(data);
+    });
+    socket.emit(
+      "identify",
+      JSON.stringify({
+        userId: "962375717465763961",
+      })
+    );
+  });
+}
+
 export default function Header() {
-  const [presence, setPresence] = useState<undefined | presenceType>(undefined);
-  const [timestamp, setTimestamp] = useState<number>(0)
+  const [presence, setPresence] = useState<undefined | Presence>(undefined);
+  const [timestamp, setTimestamp] = useState<number>(0);
 
   useEffect(() => {
-    const websocket = new WebSocket("wss://gateway.misonomika.site");
-    console.log(`[gateway.misonomika.site]: Gateway connecting...`);
+    socket.once("hello", () => {
+      sendIdentify().then(console.log);
+    });
 
-    websocket.addEventListener(
-      "open",
-      () => {
-        console.log(`[gateway.misonomika.site]: Gateway connected.`);
-      },
-      { once: true }
-    );
-
-    websocket.addEventListener(
-      "close",
-      () => {
-        console.log(`[gateway.misonomika.site]: Gateway disconnected.`);
-      },
-      { once: true }
-    );
-
-    websocket.addEventListener("message", (event) => {
-      const data = JSON.parse(event.data);
+    socket.on("presenceUpdate", (data) => {
+      data = JSON.parse(data);
       setTimestamp(data.activity?.timestamps?.start);
       setPresence(data);
     });

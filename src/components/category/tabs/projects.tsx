@@ -53,7 +53,7 @@ function Project({
     <section className="group mb-3 sm:mb-8 last:mb-0">
       <div className="overflow-hidden sm:pr-8 relative sm:h-[20rem] transition div-layout hover:bg-white/10">
         <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 flex flex-col gap-2 h-full">
-          <Link href={link} target="_blank" className="text-2xl font-semibold">
+          <Link tabIndex={-1} href={link} target="_blank" className="text-2xl font-semibold">
             {title}
           </Link>
           <p className="leading-relaxed text-white/70">{desc}</p>
@@ -68,12 +68,13 @@ function Project({
               />
             ))}
           </div>
-          <Link href={repo} rel="noopener noreferrer" className="text-white/70 hover:text-white">
+          <Link tabIndex={-1} href={repo} rel="noopener noreferrer" className="text-white/70 hover:text-white">
             Source code - read if cute
           </Link>
         </div>
 
         <Link
+          tabIndex={-1}
           href={link}
           className="absolute hidden sm:block top-8 left-[60%] w-[28.25rem] shadow-2xl
         transition 

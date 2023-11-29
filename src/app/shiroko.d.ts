@@ -1,39 +1,37 @@
-type presenceType = {
-  activity?: {
-    assets?: {
-      largeImage?: string;
-      largeText?: string;
-      smallImage?: string;
-      smallText?: string;
-    };
-    createdTimestamp?: number;
-    details?: string;
-    name?: string;
-    state?: string;
-    timestamps?: {
-      end?: null | string;
-      start?: number;
-    };
-    url: null | string;
-  };
-  customStatus?: {
-    emoji?: {
-      name?: string;
-      url?: null | string;
-    };
-    state?: string;
-  };
-  user?: {
+type Presence = {
+  user: {
+    username?: string;
     avatar?: string;
     displayName?: string;
+    banner?: string;
     status?: {
-      devices: {
-        desktop: "idle" | "dnd" | "online" | "offline";
-        mobile: "idle" | "dnd" | "online" | "offline";
-      };
-      type: "idle" | "dnd" | "online" | "offline";
+      type?: string;
+      devices?: string;
     };
-    username?: string;
+  };
+  customStatus?: {
+    state?: string;
+    emoji?: {
+      name?: string;
+      url?: string;
+    };
+  };
+  activity?: {
+    name?: string;
+    url?: string;
+    details?: string;
+    state?: string;
+    assets?: {
+      smallText?: string;
+      smallImage?: string;
+      largeText?: string;
+      largeImage?: string;
+    };
+    timestamps?: {
+      start?: null | number;
+      end?: null | number;
+    };
+    createdTimestamp?: number;
   };
 };
 

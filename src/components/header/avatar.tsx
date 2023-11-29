@@ -10,7 +10,7 @@ const songs = [
   "https://cdn.discordapp.com/attachments/1171073523704418317/1172569187718266990/y2mate.com_-_So_Far_Away_Acoustic_Martin_Garrix_David_Guetta_Cover_by_Adam_Christopher.mp3?ex=6560cb27&is=654e5627&hm=926a885cb7bc52656dcd8bf5f01213289bf720e70b13d2cb7be1d9981332f6d8&",
 ];
 
-export default function Avatar({ presence }: { presence: undefined | presenceType }) {
+export default function Avatar({ presence }: { presence: undefined | Presence }) {
   const [audio, setAudio] = useState<null | HTMLAudioElement>(null);
   const [isPlayAudio, setIsPlayAudio] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);

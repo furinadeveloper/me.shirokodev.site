@@ -69,7 +69,7 @@ const nav = [
   {
     query: "comments",
     name: "Comments",
-    desc: "",
+    desc: "Some reviews from visitors.",
     src: comments,
     color: `rgba(209, 213, 219, ${colorOpacity})`,
   },

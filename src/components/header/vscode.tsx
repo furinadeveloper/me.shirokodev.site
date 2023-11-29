@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import avatar from "@/images/avatar.webp";
-export default function VSCode({ presence, timestamp }: { presence: undefined | presenceType; timestamp: number }) {
+export default function VSCode({ presence, timestamp }: { presence: undefined | Presence; timestamp: number }) {
   const [currentElapsed, setCurrentElapsed] = useState<string>("");
 
   useEffect(() => {
@@ -24,11 +24,7 @@ export default function VSCode({ presence, timestamp }: { presence: undefined | 
   }, [timestamp]);
 
   return (
-    <div
-      className={`${
-        presence?.activity ? "flex" : "hidden"
-      } div-layout text-sm sm:text-md overflow-hidden`}
-    >
+    <div className={`${presence?.activity ? "flex" : "hidden"} div-layout text-sm sm:text-md overflow-hidden`}>
       <Image
         src={presence?.activity?.assets?.largeImage || avatar}
         width={0}

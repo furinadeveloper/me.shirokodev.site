@@ -85,6 +85,7 @@ export default function Animes() {
         },
       ].map(({ name, description, image, url }, index) => (
         <Link
+          tabIndex={-1}
           key={index}
           href={url}
           target="_blank"

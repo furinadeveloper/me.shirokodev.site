@@ -5,7 +5,7 @@ import { ColorState } from "@/resources/color";
 import VNFlag from "@/svgs/vietnam-flag.svg";
 import Map from "@/svgs/map.svg";
 
-export default function AuthorState({ presence }: { presence: undefined | presenceType }) {
+export default function AuthorState({ presence }: { presence: undefined | Presence }) {
   const statusIconRef = useRef<null | HTMLSpanElement>(null);
 
   useEffect(() => {
