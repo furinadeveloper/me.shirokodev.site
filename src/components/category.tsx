@@ -1,10 +1,11 @@
 import { Recursive } from "next/font/google";
 import { useSearchParams } from "next/navigation";
-import { lazy, useState } from "react";
+import { Fragment, lazy, useState } from "react";
 
 import skills from "@/svgs/nav/skills.svg";
 import projects from "@/svgs/nav/projects.svg";
 import events from "@/svgs/nav/events.svg";
+import musics from "@/svgs/nav/musics.svg";
 import about from "@/svgs/nav/about.svg";
 import animes from "@/svgs/nav/animes.svg";
 import games from "@/svgs/nav/games.svg";
@@ -15,9 +16,10 @@ const colorOpacity = 0.3;
 const Nav = lazy(() => import("./category/nav"));
 const Events = lazy(() => import("./category/tabs/events"));
 const About = lazy(() => import("./category/tabs/about"));
+const Musics = lazy(() => import("./category/tabs/musics"));
 const Games = lazy(() => import("./category/tabs/games"));
 const Projects = lazy(() => import("./category/tabs/projects"));
-const Technology = lazy(() => import("./category/tabs/skills"));
+const Skills = lazy(() => import("./category/tabs/skills"));
 const Animes = lazy(() => import("./category/tabs/animes"));
 const Comments = lazy(() => import("./category/tabs/comments"));
 
@@ -30,6 +32,7 @@ const nav = [
     desc: "Below are all the projects I make public.",
     src: projects,
     color: `rgba(139, 92, 246, ${colorOpacity})`,
+    slide: Projects,
   },
   {
     query: "skills",
@@ -37,6 +40,7 @@ const nav = [
     desc: "Below are all the technologies I use.",
     src: skills,
     color: `rgba(244, 63, 94, ${colorOpacity})`,
+    slide: Skills,
   },
   {
     query: "events",
@@ -44,6 +48,15 @@ const nav = [
     desc: "Outstanding events in my life that I want everyone to know about.",
     src: events,
     color: `rgba(14, 165, 233, ${colorOpacity})`,
+    slide: Events,
+  },
+  {
+    query: "musics",
+    name: "Musics",
+    desc: "The music I often listen to",
+    src: musics,
+    color: `rgba(94, 234, 212, ${colorOpacity})`,
+    slide: Musics,
   },
   {
     query: "about",
@@ -51,6 +64,7 @@ const nav = [
     desc: "Some basic information about me to help you understand me better.",
     src: about,
     color: `rgba(245, 158, 11, ${colorOpacity})`,
+    slide: About,
   },
   {
     query: "animes",
@@ -58,6 +72,7 @@ const nav = [
     desc: "The anime series I like the most.",
     src: animes,
     color: `rgba(244, 114, 182, ${colorOpacity})`,
+    slide: Animes,
   },
   {
     query: "games",
@@ -65,6 +80,7 @@ const nav = [
     desc: "The games I'm currently playing.",
     src: games,
     color: `rgba(34, 197, 94, ${colorOpacity})`,
+    slide: Games,
   },
   {
     query: "comments",
@@ -72,6 +88,7 @@ const nav = [
     desc: "Some reviews from visitors.",
     src: comments,
     color: `rgba(209, 213, 219, ${colorOpacity})`,
+    slide: Comments,
   },
 ];
 
@@ -94,15 +111,16 @@ export default function Category() {
           }
         })}
       </div>
-      <div className={font.className}>
-        {tab === "projects" && <Projects />}
-        {tab === "skills" && <Technology />}
-        {tab === "events" && <Events />}
-        {tab === "about" && <About />}
-        {tab === "animes" && <Animes />}
-        {tab === "games" && <Games />}
-        {tab === "comments" && <Comments />}
-      </div>
+      {nav.map(({ query, slide }, index) => {
+        const Slider = slide;
+        if (query === tab) {
+          return (
+            <Fragment key={index}>
+              <Slider />
+            </Fragment>
+          );
+        }
+      })}
     </div>
   );
 }

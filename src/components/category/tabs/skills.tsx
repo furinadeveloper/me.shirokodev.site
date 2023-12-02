@@ -14,13 +14,17 @@ import Linux from "@/svgs/app/linux.svg";
 import Windows from "@/svgs/app/windows.svg";
 import VSCode from "@/svgs/app/vscode.svg";
 import Motion from "@/svgs/app/motion.svg";
+import Socket from "@/svgs/app/socket.io.svg";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 
 export default function Skills() {
   const { ref, inView } = useInView({ delay: 1000, triggerOnce: true });
   return (
-    <section ref={ref} className={`flex flex-wrap justify-center gap-5 div-layout p-4 ${inView ? "fade-in" : "opacity-0"}`}>
+    <section
+      ref={ref}
+      className={`flex flex-wrap justify-center gap-5 div-layout p-4 ${inView ? "fade-in" : "opacity-0"}`}
+    >
       {[
         HTML,
         CSS,
@@ -33,6 +37,7 @@ export default function Skills() {
         Tailwind,
         Bootstrap,
         Motion,
+        Socket,
         CloudFlare,
         Github,
         VSCode,

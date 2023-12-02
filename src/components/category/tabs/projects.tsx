@@ -3,6 +3,7 @@
 import Nextjs from "@/svgs/app/nextjs.svg";
 import Tailwindcss from "@/svgs/app/tailwind.svg";
 import Motion from "@/svgs/app/motion.svg";
+import Socket from "@/svgs/app/socket.io.svg";
 import Image from "next/image";
 import profileImage from "@/images/projects/profile.png";
 import homepageImage from "@/images/projects/homepage.png";
@@ -23,12 +24,12 @@ export default function Projects() {
         use={[Nextjs, Tailwindcss]}
       />
       <Project
-        title="profile.shirokodev.site"
+        title="me.shirokodev.site"
         desc="My portfolio website:>"
         img={profileImage}
         link="/"
-        repo="https://github.com/sunaookamishirokodev/profile.shirokodev.site"
-        use={[Nextjs, Tailwindcss, Motion]}
+        repo="https://github.com/sunaookamishirokodev/me.shirokodev.site"
+        use={[Nextjs, Tailwindcss, Motion, Socket]}
       />
     </section>
   );

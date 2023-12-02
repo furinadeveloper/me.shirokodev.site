@@ -16,9 +16,9 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "api.screenshotone.com",
+        hostname: "photo-resize-zmp3.zmdcdn.me",
         port: "",
-        pathname: "/take",
+        pathname: "/**",
       },
     ],
   },

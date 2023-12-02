@@ -1,7 +1,19 @@
 {
   "name": "profile.shirokodev.site",
-  "version": "0.3.0",
+  "description": "Hey guy! This is my source code: me.shirokodev.site. Read it if cute:3",
+  "author": "Sunaookami Shiroko",
+  "version": "2.0.0",
   "private": true,
+  "keywords": [
+    "personal-website",
+    "portfolio-website",
+    "nextjs14"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunaookamishirokodev/me.shirokodev.site.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

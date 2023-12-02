@@ -4,7 +4,7 @@ import { config } from "dotenv";
 config();
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://profile.shirokodev.site/"),
+  metadataBase: new URL("https://me.shirokodev.site/"),
   title: "Shiroko's Profile",
   description: "Hey guys! Welcome to my website:3",
   applicationName: "Personal Portfolio",

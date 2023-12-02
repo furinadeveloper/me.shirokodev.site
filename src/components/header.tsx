@@ -4,17 +4,23 @@ import Avatar from "./header/avatar";
 import Introduction from "./header/introduction";
 import AuthorState from "./header/author-state";
 import { io } from "socket.io-client";
+import AnimateProvider from "./animate-provider";
 
 const VSCode = lazy(() => import("./header/vscode"));
 
-const socket = io("wss://gateway.shirokodev.site");
+const socket = io("wss://gateway.shirokodev.site", {
+  withCredentials: true,
+  extraHeaders: {
+    "shiroko-socket": "shiroko-presence",
+  },
+});
 function sendIdentify(): Promise<{
   error: string;
   data: string;
   msg: string;
 }> {
   return new Promise((resolve) => {
-    socket.once("identifyResult", (data) => {
+    socket.once("identify:result", (data) => {
       data = JSON.parse(data);
       resolve(data);
     });
@@ -32,16 +38,21 @@ export default function Header() {
   const [timestamp, setTimestamp] = useState<number>(0);
 
   useEffect(() => {
-    socket.once("hello", () => {
-      sendIdentify().then(console.log);
+    socket.once("user:ready", () => {
+      sendIdentify().then();
     });
 
-    socket.on("presenceUpdate", (data) => {
+    socket.on("presence:update", (data) => {
       data = JSON.parse(data);
       setTimestamp(data.activity?.timestamps?.start);
       setPresence(data);
     });
-  }, []);
+    return () => {
+      socket.on("disconnect", function () {
+        console.log("disconnect socket in client....");
+      });
+    };
+  });
 
   return (
     <header className="box-layout flex flex-col lg:flex-row gap-10">
