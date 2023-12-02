@@ -4,7 +4,6 @@ import Avatar from "./header/avatar";
 import Introduction from "./header/introduction";
 import AuthorState from "./header/author-state";
 import { io } from "socket.io-client";
-import AnimateProvider from "./animate-provider";
 
 const VSCode = lazy(() => import("./header/vscode"));
 
