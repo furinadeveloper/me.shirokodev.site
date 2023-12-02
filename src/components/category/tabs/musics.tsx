@@ -4,7 +4,7 @@ import Image from "next/image";
 import Komorebi from "@/images/musics/komorebi.webp";
 import NhinKiaTroiToiRoi from "@/images/musics/nhinkiatroitoiroi.jpg";
 import FakeLove from "@/images/musics/fakelove.jpg";
-import { useEffect, useState, useRef, MouseEventHandler } from "react";
+import { useEffect, useState, useRef } from "react";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { FaCirclePlay, FaCirclePause, FaShuffle, FaRotateLeft, FaForwardStep, FaBackwardStep } from "react-icons/fa6";
 const songs = [
