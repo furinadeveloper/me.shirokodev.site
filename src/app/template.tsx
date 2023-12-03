@@ -1,5 +1,5 @@
-import { Fira_Code } from "next/font/google";
-const font = Fira_Code({ subsets: ["latin"] });
+import { JetBrains_Mono } from "next/font/google";
+const font = JetBrains_Mono({ subsets: ["latin"] });
 
 export default function Home({ children }: { children: React.ReactNode }) {
   return (

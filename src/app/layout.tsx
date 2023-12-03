@@ -30,13 +30,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shiroko's Profile",
     description: "Hey guys! Welcome to my website:3",
-    url: "https://profile.shirokodev.site/",
-    siteName: "profile.shirokodev.site",
+    url: "https://me.shirokodev.site/",
+    siteName: "me.shirokodev.site",
     locale: "vi_VN",
     countryName: "Vietnam",
     images: [
       {
-        url: "/seo.gif",
+        url: "/seo.png",
         alt: "Shiroko Background SEO",
       },
     ],
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Shiroko's Profile",
     description: "Hey guys! Welcome to my website:3",
-    site: "profile.shirokodev.site",
+    site: "me.shirokodev.site",
     creator: "@shirokoxdev",
-    images: "/seo.gif",
+    images: "/seo.png",
   },
 };
 

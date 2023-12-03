@@ -46,7 +46,7 @@ export default function AuthorState({ presence }: { presence: undefined | Presen
       <div className="flex flex-col sm:flex-row mb-4">
         <div className="flex">
           <span ref={statusIconRef} className="bg-offline h-5 aspect-square mr-2 my-auto rounded-full" />
-          <span className="mr-4">currently {presence?.user?.status?.type || "offline"}</span>
+          <span className="mr-4">currently {presence?.user?.status?.type || "Zzz..."}</span>
         </div>
         <div className="flex">
           <Image src={Map} alt="" height={16} width={16} className="my-auto mr-2" />

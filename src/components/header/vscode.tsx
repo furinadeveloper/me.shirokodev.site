@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import avatar from "@/images/avatar.webp";
+import sleep from "@/images/sleep.png";
 export default function VSCode({ presence, timestamp }: { presence: undefined | Presence; timestamp: number }) {
   const [currentElapsed, setCurrentElapsed] = useState<string>("");
 
@@ -24,20 +24,27 @@ export default function VSCode({ presence, timestamp }: { presence: undefined | 
   }, [timestamp]);
 
   return (
-    <div className={`${presence?.activity ? "flex" : "hidden"} div-layout text-sm sm:text-md overflow-hidden`}>
+    <div className={`flex div-layout text-sm sm:text-md overflow-hidden`}>
       <Image
-        src={presence?.activity?.assets?.largeImage || avatar}
+        src={presence?.activity?.assets?.largeImage || sleep}
         width={0}
         height={0}
         sizes="100vw"
         className="w-[128px] aspect-square"
-        alt={presence?.activity?.assets?.largeText || ""}
+        alt={presence?.activity?.assets?.largeText || "Zzz..."}
       />
       <div className="pl-3 my-auto">
-        <div className="text-md sm:text-lg">{presence?.activity?.name || ""}</div>
-        <div>{presence?.activity?.state || ""}</div>
-        <div>{presence?.activity?.details}</div>
-        <div>Elapsed: {currentElapsed}</div>
+        <div className="text-md sm:text-lg">{presence?.activity?.name || "At school or home"}</div>
+        <div>{(presence?.activity && presence?.activity?.state) || ""}</div>
+        <div className="flex flex-col">
+          {(presence?.activity && presence?.activity?.details) || (
+            <>
+              <span>🏠 | If (home) Sleeping...</span>
+              <span>🏫 | If (school) Studying...</span>
+            </>
+          )}
+        </div>
+        <div>Elapsed: {(presence?.activity && currentElapsed) || "Infinity:>"}</div>
       </div>
     </div>
   );

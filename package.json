@@ -2,7 +2,7 @@
   "name": "profile.shirokodev.site",
   "description": "Hey guy! This is my source code: me.shirokodev.site. Read it if cute:3",
   "author": "Sunaookami Shiroko",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "keywords": [
     "personal-website",
@@ -19,7 +19,7 @@
     "build": "next build",
     "start": "next start -p 2222",
     "lint": "next lint",
-    "deploy": "next build && pm2 restart all"
+    "deploy": "next build && pm2 restart all --update-env"
   },
   "dependencies": {
     "dotenv": "^16.3.1",

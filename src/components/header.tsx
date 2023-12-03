@@ -46,11 +46,6 @@ export default function Header() {
       setTimestamp(data.activity?.timestamps?.start);
       setPresence(data);
     });
-    return () => {
-      socket.on("disconnect", function () {
-        console.log("disconnect socket in client....");
-      });
-    };
   });
 
   return (
