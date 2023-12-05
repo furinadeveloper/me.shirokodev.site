@@ -100,7 +100,10 @@ export default function Musics() {
   const trackRef = useRef<null | HTMLDivElement>(null);
   const thumbRef = useRef<null | HTMLDivElement>(null);
 
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    delay: 1000,
+  });
 
   useEffect(() => {
     setAudio(new Audio());
