@@ -4,12 +4,18 @@ import Nextjs from "@/svgs/app/nextjs.svg";
 import Tailwindcss from "@/svgs/app/tailwind.svg";
 import Motion from "@/svgs/app/motion.svg";
 import Socket from "@/svgs/app/socket.io.svg";
+import Djs from "@/svgs/app/djs.svg";
 import Image from "next/image";
 import profileImage from "@/images/projects/profile.png";
 import homepageImage from "@/images/projects/homepage.png";
+import shirokoBot from "@/images/projects/shiroko-bot.png";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
+import { config } from "dotenv";
+config();
+
+const { SHIROKO_BOT_ID } = process.env;
 
 export default function Projects() {
   const { ref, inView } = useInView({ delay: 1000, triggerOnce: true });
@@ -30,6 +36,14 @@ export default function Projects() {
         link="/"
         repo="https://github.com/sunaookamishirokodev/me.shirokodev.site"
         use={[Nextjs, Tailwindcss, Motion, Socket]}
+      />
+      <Project
+        title="shiroko bot discord"
+        desc="Shiroko's bot make by Shiroko(:"
+        img={shirokoBot}
+        link={`https://discord.com/api/oauth2/authorize?client_id=1180883882552348812&permissions=8&scope=bot`}
+        repo="https://github.com/sunaookamishirokodev/shiroko-bot"
+        use={[Djs]}
       />
     </section>
   );
@@ -53,7 +67,7 @@ function Project({
   return (
     <section className="group mb-3 sm:mb-8 last:mb-0">
       <div className="overflow-hidden sm:pr-8 relative sm:h-[20rem] transition div-layout hover:bg-white/10">
-        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 flex flex-col gap-2 h-full">
+        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 flex flex-col gap-2 h-full max-w-[65%]">
           <Link tabIndex={-1} href={link} target="_blank" className="text-2xl font-semibold">
             {title}
           </Link>

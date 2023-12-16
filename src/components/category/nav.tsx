@@ -55,7 +55,7 @@ export default function Nav({
                     stiffness: 380,
                     damping: 30,
                   }}
-                ></motion.span>
+                />
               )}
             </motion.li>
           );
