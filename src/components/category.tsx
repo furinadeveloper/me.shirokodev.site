@@ -94,16 +94,23 @@ const nav = [
 
 export default function Category() {
   const searchParams = useSearchParams();
-  const [tab, setTab] = useState<null | string>(searchParams.get("tab") || nav[0].query);
+  const [tab, setTab] = useState<null | string>(
+    searchParams.get("tab") || nav[0].query,
+  );
   return (
     <div className="box-layout">
       <Nav nav={nav} tab={tab} setTab={setTab} />
-      <div className="group flex gap-2 mb-5 select-none mt-10">
-        <span className="text-4xl text-zinc-800 group-hover:text-emerald-400">#</span>
+      <div className="group mb-5 mt-10 flex select-none gap-2">
+        <span className="text-4xl text-zinc-800 group-hover:text-emerald-400">
+          #
+        </span>
         {nav.map(({ query, desc }, index) => {
           if (query === tab) {
             return (
-              <div key={index} className={`${font.className} flex flex-col gap-3 opacity-70 group-hover:opacity-100`}>
+              <div
+                key={index}
+                className={`${font.className} flex flex-col gap-3 opacity-70 group-hover:opacity-100`}
+              >
                 <span className={`text-4xl font-bold`}>{query}</span>
                 <span>{desc}</span>
               </div>

@@ -13,7 +13,14 @@ export const metadata: Metadata = {
     name: "Sunaookami Shiroko",
   },
   generator: "NextJS TailwinCSS TypeScript",
-  keywords: ["Shiroko", "Shiroko Dev", "Sunaookami Shiroko", "Personal Website", "Personal Portfolio", "Profile"],
+  keywords: [
+    "Shiroko",
+    "Shiroko Dev",
+    "Sunaookami Shiroko",
+    "Personal Website",
+    "Personal Portfolio",
+    "Profile",
+  ],
   referrer: "origin-when-cross-origin",
   verification: {
     google: String(process.env.GOOGLE_KEY),
@@ -52,7 +59,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html suppressHydrationWarning translate="no" lang="en">
       {children}

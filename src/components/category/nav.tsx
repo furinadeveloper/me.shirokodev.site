@@ -19,9 +19,14 @@ export default function Nav({
   useEffect(() => {}, []);
 
   return (
-    <nav ref={ref} className="relative h-16 overflow-y-hidden overflow-x-scroll">
+    <nav
+      ref={ref}
+      className="relative h-16 overflow-y-hidden overflow-x-scroll"
+    >
       <ul
-        className={`flex absolute left-0 top-0 w-full select-none gap-4 font-bold ${inView ? "fade-in" : "opacity-0"}`}
+        className={`absolute left-0 top-0 flex w-full select-none gap-4 font-bold ${
+          inView ? "fade-in" : "opacity-0"
+        }`}
       >
         {nav.map(({ name, query, color, src }, index) => {
           return (
@@ -35,7 +40,7 @@ export default function Nav({
                 });
               }}
               style={{ backgroundColor: color }}
-              className={`relative flex cursor-pointer gap-2 p-3 rounded-full opacity-80 hover:opacity-100 transition-[opacity] ${
+              className={`relative flex cursor-pointer gap-2 rounded-full p-3 opacity-80 transition-[opacity] hover:opacity-100 ${
                 tab === query && "!opacity-100"
               }`}
               key={index}
@@ -43,12 +48,17 @@ export default function Nav({
               animate={{ y: 0 }}
             >
               <div className="flex">{name}</div>
-              <div className="w-4 flex">
-                <Image src={src} style={{ width: "100%", height: "auto" }} alt={`${name} Icon`} className="my-auto" />
+              <div className="flex w-4">
+                <Image
+                  src={src}
+                  style={{ width: "100%", height: "auto" }}
+                  alt={`${name} Icon`}
+                  className="my-auto"
+                />
               </div>
               {query === tab && (
                 <motion.span
-                  className={`rounded-full absolute inset-0 -z-10 bg-white/50`}
+                  className={`absolute inset-0 -z-10 rounded-full bg-white/50`}
                   layoutId="activeSection"
                   transition={{
                     type: "spring",

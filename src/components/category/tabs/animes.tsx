@@ -15,11 +15,17 @@ import { useInView } from "react-intersection-observer";
 export default function Animes() {
   const { ref, inView } = useInView({ triggerOnce: true, delay: 1000 });
   return (
-    <section ref={ref} className={`grid grid-cols-1 lg:grid-cols-2 gap-4 ${inView ? "fade-in" : "opacity-0"}`}>
+    <section
+      ref={ref}
+      className={`grid grid-cols-1 gap-4 lg:grid-cols-2 ${
+        inView ? "fade-in" : "opacity-0"
+      }`}
+    >
       {[
         {
           name: "Sword Art Online: Alicization",
-          description: "Kirito awakens in a vast, fantastical forest filled with towering trees.",
+          description:
+            "Kirito awakens in a vast, fantastical forest filled with towering trees.",
           image: SwordArtOnline,
           url: "https://anilist.co/anime/100182/Sword-Art-Online-Alicization/",
         },
@@ -43,7 +49,8 @@ export default function Animes() {
         },
         {
           name: "Meitantei Conan",
-          description: "Shinichi is harmed by the black organization and journeys to find a solution to his situation.",
+          description:
+            "Shinichi is harmed by the black organization and journeys to find a solution to his situation.",
           image: MeitanteiConan,
           url: "https://anilist.co/anime/235/Meitantei-Conan/",
         },
@@ -61,7 +68,8 @@ export default function Animes() {
         },
         {
           name: "Oshi no Ko",
-          description: "Idols and die-hard fans are reincarnated as her children",
+          description:
+            "Idols and die-hard fans are reincarnated as her children",
           image: OshinoKo,
           url: "https://anilist.co/anime/150672/Oshi-no-Ko/",
         },
@@ -73,13 +81,15 @@ export default function Animes() {
         },
         {
           name: "Re:Zero kara Hajimeru Isekai Seikatsu",
-          description: "The tragedy of Subaru's ability to die and come back to life and his love for Emilia.",
+          description:
+            "The tragedy of Subaru's ability to die and come back to life and his love for Emilia.",
           image: ReZero,
           url: "https://anilist.co/manga/85737/ReZero-kara-Hajimeru-Isekai-Seikatsu/",
         },
         {
           name: "Lycoris Recoil",
-          description: "Tells about the great feelings and abilities of two young girls.",
+          description:
+            "Tells about the great feelings and abilities of two young girls.",
           image: LycorisRecoil,
           url: "https://anilist.co/anime/143270/Lycoris-Recoil/",
         },
@@ -99,7 +109,7 @@ export default function Animes() {
             height={240}
             className="absolute left-0 top-0 h-full w-full rounded-lg object-cover transition duration-150 group-hover:scale-[1.02]"
           />
-          <div className="z-20 w-full my-auto scale-95 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100">
+          <div className="z-20 my-auto w-full scale-95 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100">
             <h3 className="text-3xl font-bold">
               <span className="text-stone-300">{index + 1} </span>
               {name}

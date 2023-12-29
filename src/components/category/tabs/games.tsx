@@ -1,7 +1,7 @@
 export default function Games() {
   return (
-    <section className="flex h-40 div-layout">
-      <span className="text-xl m-auto">Coming Soon</span>
+    <section className="div-layout flex h-40">
+      <span className="m-auto text-xl">Coming Soon</span>
     </section>
   );
 }

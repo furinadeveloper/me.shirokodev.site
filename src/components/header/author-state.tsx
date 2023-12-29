@@ -5,7 +5,11 @@ import { ColorState } from "@/resources/color";
 import VNFlag from "@/svgs/vietnam-flag.svg";
 import Map from "@/svgs/map.svg";
 
-export default function AuthorState({ presence }: { presence: undefined | Presence }) {
+export default function AuthorState({
+  presence,
+}: {
+  presence: undefined | Presence;
+}) {
   const statusIconRef = useRef<null | HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -34,24 +38,43 @@ export default function AuthorState({ presence }: { presence: undefined | Presen
   return (
     <>
       <div className="mb-1">
-        <span className="font-bold text-lg sm:text-xl md:text-4xl">Sunaookami Shiroko</span>
+        <span className="text-lg font-bold sm:text-xl md:text-4xl">
+          Sunaookami Shiroko
+        </span>
         <Image
           src={HelloIcon}
           alt="Hello Icon"
           width={0}
           height={0}
-          className="inline-block ml-3 mb-3 w-8 aspect-square animate-wave"
+          className="animate-wave mb-3 ml-3 inline-block aspect-square w-8"
         />
       </div>
-      <div className="flex flex-col sm:flex-row mb-4">
+      <div className="mb-4 flex flex-col sm:flex-row">
         <div className="flex">
-          <span ref={statusIconRef} className="bg-offline h-5 aspect-square mr-2 my-auto rounded-full" />
-          <span className="mr-4">currently {presence?.user?.status?.type || "Zzz..."}</span>
+          <span
+            ref={statusIconRef}
+            className="bg-offline my-auto mr-2 aspect-square h-5 rounded-full"
+          />
+          <span className="mr-4">
+            currently {presence?.user?.status?.type || "Zzz..."}
+          </span>
         </div>
         <div className="flex">
-          <Image src={Map} alt="" height={16} width={16} className="my-auto mr-2" />
+          <Image
+            src={Map}
+            alt=""
+            height={16}
+            width={16}
+            className="my-auto mr-2"
+          />
           <span className="mr-2">Khanh Hoa / Viet Nam</span>
-          <Image src={VNFlag} alt="Viet Nam Flag" width="0" height="0" className="w-5 aspect-square h-auto" />
+          <Image
+            src={VNFlag}
+            alt="Viet Nam Flag"
+            width="0"
+            height="0"
+            className="aspect-square h-auto w-5"
+          />
         </div>
       </div>
     </>

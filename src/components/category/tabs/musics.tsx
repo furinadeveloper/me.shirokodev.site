@@ -6,7 +6,14 @@ import NhinKiaTroiToiRoi from "@/images/musics/nhinkiatroitoiroi.jpg";
 import FakeLove from "@/images/musics/fakelove.jpg";
 import { useEffect, useState, useRef } from "react";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { FaCirclePlay, FaCirclePause, FaShuffle, FaRotateLeft, FaForwardStep, FaBackwardStep } from "react-icons/fa6";
+import {
+  FaCirclePlay,
+  FaCirclePause,
+  FaShuffle,
+  FaRotateLeft,
+  FaForwardStep,
+  FaBackwardStep,
+} from "react-icons/fa6";
 const songs = [
   {
     name: "Arcade",
@@ -65,18 +72,11 @@ const songs = [
     url: "https://cdn.discordapp.com/attachments/1171073523704418317/1180513700994633779/y2mate.com_-_Lukas_Graham_Happy_For_You_feat_Vu_Performance_Video.mp3?ex=657db20f&is=656b3d0f&hm=e9fd81c4459708bc93605b1b169819800f68ee40a0e21aa218744796fe79e8d3&",
   },
   {
-    name: "id 072019",
-    singer: "W/N",
-    pic: "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/6/e/d/b/6edb77335e90a767735022f61ae93ab4.jpg",
-    duration: "04:32",
-    url: "https://a128-zmp3.zmdcdn.me/90083d6a4f1c62d2b7b5f3e76fed2986?authen=exp=1701606568~acl=/90083d6a4f1c62d2b7b5f3e76fed2986/*~hmac=64233462b07ab6856c291bfd28638078",
-  },
-  {
-    name: "3107 3",
-    singer: "W/N, Duongg, Nâu, titie",
-    pic: "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/c/a/2/6/ca266dd4fe3e3a296dd3a469c7972bf0.jpg",
-    duration: "04:00",
-    url: "https://a128-zmp3.zmdcdn.me/25df5f6d8d3e551a88cc208c790aaa2f?authen=exp=1701607051~acl=/25df5f6d8d3e551a88cc208c790aaa2f/*~hmac=c72cff354c00268add5cdb167d1c6b9c",
+    name: "Payphone × Call Me Maybe",
+    singer: "Anthem Lights",
+    pic: "https://i1.sndcdn.com/artworks-slkoM7pzaij4zvIC-AHYhyQ-t500x500.jpg",
+    duration: "03:09",
+    url: "https://cdn.discordapp.com/attachments/1171073523704418317/1187167238772494406/y2mate.com_-_LyricsVietsub_Payphone_Call_Me_Maybe_Anthem_Lights.mp3?ex=6595e6a6&is=658371a6&hm=45a9b62b7f50a9df2761280ea1557f865bb576942bd54b9f4d797311c2b614cb&",
   },
   {
     name: "방탄소년단",
@@ -152,7 +152,9 @@ export default function Musics() {
       setIsPlay(true);
       const interval = setInterval(() => {
         if (trackRef.current && thumbRef.current) {
-          thumbRef.current.style.right = `${100 - (audio.currentTime / audio.duration) * 100}%`;
+          thumbRef.current.style.right = `${
+            100 - (audio.currentTime / audio.duration) * 100
+          }%`;
         }
       }, 1000);
       setIDInterval(interval);
@@ -221,7 +223,9 @@ export default function Musics() {
   const handleChangeProgress = (e: any) => {
     if (audio && trackRef.current && thumbRef.current) {
       const trackRect = trackRef.current.getBoundingClientRect();
-      const percent = Math.round(((e.clientX - trackRect.left) * 10000) / trackRect.width) / 100;
+      const percent =
+        Math.round(((e.clientX - trackRect.left) * 10000) / trackRect.width) /
+        100;
       thumbRef.current.style.right = `${100 - percent}%`;
       audio.currentTime = (percent * audio.duration) / 100;
       const newTime = Math.round(audio.currentTime);
@@ -232,11 +236,13 @@ export default function Musics() {
   return (
     <section
       ref={ref}
-      className={`grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-5 ${inView ? "fade-in" : "opacity-0"}`}
+      className={`grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-5 ${
+        inView ? "fade-in" : "opacity-0"
+      }`}
     >
-      <div className="relative col-span-1 min-h-[300px] lg:col-span-3 div-layout overflow-y-scroll">
-        <ul className="absolute top-0 left-0 w-full h-full p-4">
-          <li className="grid grid-cols-6 pb-2 pl-16 pr-2 border-b border-white/5">
+      <div className="div-layout relative col-span-1 min-h-[300px] overflow-y-scroll lg:col-span-3">
+        <ul className="absolute left-0 top-0 h-full w-full p-4">
+          <li className="grid grid-cols-6 border-b border-white/5 pb-2 pl-16 pr-2">
             <span className="col-span-3 md:col-span-2">Name</span>
             <span className="col-span-3">Singer</span>
             <span className="col-span-1 hidden md:inline-block">Duration</span>
@@ -246,21 +252,25 @@ export default function Musics() {
               <li
                 onClick={() => handleChooseSong(index)}
                 key={index}
-                className={`flex gap-2 p-2 border-b border-white/5 rounded-md cursor-pointer transition-[background-color_0.1s_linear] hover:bg-white/10
+                className={`flex cursor-pointer gap-2 rounded-md border-b border-white/5 p-2 transition-[background-color_0.1s_linear] hover:bg-white/10
                 ${crrIndex === index && isPlay && "!bg-white/20"}`}
               >
                 <Image src={pic} alt={`${name} Image`} width={50} height={50} />
-                <div className="grid grid-cols-6 flex-1">
-                  <span className="col-span-3 md:col-span-2 my-auto">{name}</span>
+                <div className="grid flex-1 grid-cols-6">
+                  <span className="col-span-3 my-auto md:col-span-2">
+                    {name}
+                  </span>
                   <span className="col-span-3 my-auto">{singer}</span>
-                  <span className="col-span-1 my-auto hidden md:inline-block">{duration}</span>
+                  <span className="col-span-1 my-auto hidden md:inline-block">
+                    {duration}
+                  </span>
                 </div>
               </li>
             );
           })}
         </ul>
       </div>
-      <div className="flex flex-col col-span-1 lg:col-span-2 gap-3 items-center justify-around div-layout p-4">
+      <div className="div-layout col-span-1 flex flex-col items-center justify-around gap-3 p-4 lg:col-span-2">
         <span>Now Playing: {songs[crrIndex].name}</span>
         <Image
           src={crrImg}
@@ -268,34 +278,54 @@ export default function Musics() {
           width={0}
           height={0}
           sizes="100vw"
-          className={`w-3/5 rounded-full border-4 border-white animate-circle ${
-            !isPlay ? "[animation-play-state:paused]" : "[animation-play-state:running]"
+          className={`w-3/5 animate-circle rounded-full border-4 border-white ${
+            !isPlay
+              ? "[animation-play-state:paused]"
+              : "[animation-play-state:running]"
           }`}
         />
-        <div className="flex text-lg gap-4 items-center">
-          <FaBackwardStep onClick={handlePrevSong} className="opacity-70 hover:opacity-100 cursor-pointer" />
+        <div className="flex items-center gap-4 text-lg">
+          <FaBackwardStep
+            onClick={handlePrevSong}
+            className="cursor-pointer opacity-70 hover:opacity-100"
+          />
           <FaShuffle
             onClick={handleShuffle}
-            className={`opacity-70 hover:opacity-100 cursor-pointer ${isShuffle && "!opacity-100"}`}
+            className={`cursor-pointer opacity-70 hover:opacity-100 ${
+              isShuffle && "!opacity-100"
+            }`}
           />
           <FaCirclePause
             onClick={handlePause}
-            className={`text-4xl opacity-70 hover:opacity-100 cursor-pointer ${!isPlay && "hidden"}`}
+            className={`cursor-pointer text-4xl opacity-70 hover:opacity-100 ${
+              !isPlay && "hidden"
+            }`}
           />
           <FaCirclePlay
             onClick={handlePlay}
-            className={`text-4xl opacity-70 hover:opacity-100 cursor-pointer ${isPlay && "hidden"}`}
+            className={`cursor-pointer text-4xl opacity-70 hover:opacity-100 ${
+              isPlay && "hidden"
+            }`}
           />
           <FaRotateLeft
             onClick={handleLoop}
-            className={`opacity-70 hover:opacity-100 cursor-pointer ${isLoop && "!opacity-100"}`}
+            className={`cursor-pointer opacity-70 hover:opacity-100 ${
+              isLoop && "!opacity-100"
+            }`}
           />
-          <FaForwardStep onClick={handleNextSong} className="opacity-70 hover:opacity-100 cursor-pointer" />
+          <FaForwardStep
+            onClick={handleNextSong}
+            className="cursor-pointer opacity-70 hover:opacity-100"
+          />
         </div>
-        <div onClick={handleChangeProgress} ref={trackRef} className="relative h-1 w-full rounded-full bg-zinc-700">
+        <div
+          onClick={handleChangeProgress}
+          ref={trackRef}
+          className="relative h-1 w-full rounded-full bg-zinc-700"
+        >
           <div
             ref={thumbRef}
-            className="absolute transition-all rounded-full top-0 left-0 h-full bg-white hover:after:absolute hover:after:-bottom-1 hover:bg-emerald-300 hover:after:right-0 hover:after:h-3 hover:after:w-3 hover:after:rounded-full hover:after:bg-white "
+            className="absolute left-0 top-0 h-full rounded-full bg-white transition-all hover:bg-emerald-300 hover:after:absolute hover:after:-bottom-1 hover:after:right-0 hover:after:h-3 hover:after:w-3 hover:after:rounded-full hover:after:bg-white "
           />
         </div>
       </div>

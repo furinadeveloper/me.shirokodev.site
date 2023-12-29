@@ -15,12 +15,15 @@ import { useInView } from "react-intersection-observer";
 import { config } from "dotenv";
 config();
 
-const { SHIROKO_BOT_ID } = process.env;
-
 export default function Projects() {
   const { ref, inView } = useInView({ delay: 1000, triggerOnce: true });
   return (
-    <section ref={ref} className={`grid gap-4 grid-cols-1 lg:grid-cols-2 ${inView ? "fade-in" : "opacity-0"}`}>
+    <section
+      ref={ref}
+      className={`grid grid-cols-1 gap-4 lg:grid-cols-2 ${
+        inView ? "fade-in" : "opacity-0"
+      }`}
+    >
       <Project
         title="shirokodev.site"
         desc="My home page website:3"
@@ -37,14 +40,14 @@ export default function Projects() {
         repo="https://github.com/sunaookamishirokodev/me.shirokodev.site"
         use={[Nextjs, Tailwindcss, Motion, Socket]}
       />
-      <Project
+      {/* <Project
         title="shiroko bot discord"
         desc="Shiroko's bot make by Shiroko(:"
         img={shirokoBot}
         link={`https://discord.com/api/oauth2/authorize?client_id=1180883882552348812&permissions=8&scope=bot`}
         repo="https://github.com/sunaookamishirokodev/shiroko-bot"
         use={[Djs]}
-      />
+      /> */}
     </section>
   );
 }
@@ -65,14 +68,19 @@ function Project({
   use: StaticImport[];
 }) {
   return (
-    <section className="group mb-3 sm:mb-8 last:mb-0">
-      <div className="overflow-hidden sm:pr-8 relative sm:h-[20rem] transition div-layout hover:bg-white/10">
-        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 flex flex-col gap-2 h-full max-w-[65%]">
-          <Link tabIndex={-1} href={link} target="_blank" className="text-2xl font-semibold">
+    <section className="group mb-3 last:mb-0 sm:mb-8">
+      <div className="div-layout relative overflow-hidden transition hover:bg-white/10 sm:h-[20rem] sm:pr-8">
+        <div className="flex h-full max-w-[65%] flex-col gap-2 px-5 pb-7 pt-4 sm:pl-10 sm:pr-2 sm:pt-10">
+          <Link
+            tabIndex={-1}
+            href={link}
+            target="_blank"
+            className="text-2xl font-semibold"
+          >
             {title}
           </Link>
           <p className="leading-relaxed text-white/70">{desc}</p>
-          <div className="flex flex-wrap mt-auto gap-2">
+          <div className="mt-auto flex flex-wrap gap-2">
             {use.map((tag, index) => (
               <Image
                 key={index}
@@ -83,7 +91,12 @@ function Project({
               />
             ))}
           </div>
-          <Link tabIndex={-1} href={repo} rel="noopener noreferrer" className="text-white/70 hover:text-white">
+          <Link
+            tabIndex={-1}
+            href={repo}
+            rel="noopener noreferrer"
+            className="text-white/70 hover:text-white"
+          >
             Source code - read if cute
           </Link>
         </div>
@@ -91,12 +104,12 @@ function Project({
         <Link
           tabIndex={-1}
           href={link}
-          className="absolute hidden sm:block top-8 left-[60%] w-[28.25rem] shadow-2xl
-        transition 
-        group-hover:scale-[1.04]
-        group-hover:-translate-x-3
+          className="absolute left-[60%] top-8 hidden w-[28.25rem] shadow-2xl transition
+        group-hover:-translate-x-3 
         group-hover:translate-y-3
-        group-hover:-rotate-2"
+        group-hover:-rotate-2
+        group-hover:scale-[1.04]
+        sm:block"
           target="_blank"
         >
           <Image

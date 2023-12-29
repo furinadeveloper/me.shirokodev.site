@@ -23,7 +23,9 @@ export default function Skills() {
   return (
     <section
       ref={ref}
-      className={`flex flex-wrap justify-center gap-5 div-layout p-4 ${inView ? "fade-in" : "opacity-0"}`}
+      className={`div-layout flex flex-wrap justify-center gap-5 p-4 ${
+        inView ? "fade-in" : "opacity-0"
+      }`}
     >
       {[
         HTML,
@@ -44,7 +46,12 @@ export default function Skills() {
         Linux,
         Windows,
       ].map((icon, index) => (
-        <Image key={index} src={icon} alt="" style={{ width: "80px", height: "auto" }} />
+        <Image
+          key={index}
+          src={icon}
+          alt=""
+          style={{ width: "80px", height: "auto" }}
+        />
       ))}
     </section>
   );

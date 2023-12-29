@@ -8,11 +8,11 @@
 
 @layer utilities {
   .div-layout {
-    @apply bg-[#222] border-[rgba(255,255,255,0.2)] rounded-md;
+    @apply rounded-md border-[rgba(255,255,255,0.2)] bg-[#222];
   }
 
   .box-layout {
-    @apply w-full bg-[#121212] p-2 sm:p-10 md:p-16 rounded-xl;
+    @apply w-full rounded-xl bg-[#121212] p-2 sm:p-10 md:p-16;
   }
 }
 

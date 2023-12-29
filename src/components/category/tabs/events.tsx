@@ -7,7 +7,10 @@ import { FaHeart } from "react-icons/fa";
 import { FaCode } from "react-icons/fa";
 import { FaReact } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
-import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { createElement, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
@@ -22,7 +25,8 @@ export default function Experience() {
           {
             title: "Dating with Chloe",
             location: "Viet Nam",
-            description: "After about a month of getting to know her, I decided to date her.",
+            description:
+              "After about a month of getting to know her, I decided to date her.",
             icon: createElement(FaHeart),
             img: chloe,
             date: "28/1/2023 - present",
@@ -73,13 +77,18 @@ export default function Experience() {
               fontSize: "1.5rem",
             }}
           >
-            <div className="flex group-odd:flex-row-reverse gap-4 text-white">
+            <div className="flex gap-4 text-white group-odd:flex-row-reverse">
               <div>
                 <h3 className="font-semibold capitalize">{title}</h3>
                 <p className="!mt-0">{location}</p>
                 <p className="!mt-1 !font-normal">{description}</p>
               </div>
-              <Image src={img} alt="" style={{ width: "25%", height: "auto" }} className="rounded-md my-auto" />
+              <Image
+                src={img}
+                alt=""
+                style={{ width: "25%", height: "auto" }}
+                className="my-auto rounded-md"
+              />
             </div>
           </VerticalTimelineElement>
         ))}

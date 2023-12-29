@@ -27,7 +27,7 @@ function sendIdentify(): Promise<{
       "identify",
       JSON.stringify({
         userId: "962375717465763961",
-      })
+      }),
     );
   });
 }
@@ -49,8 +49,8 @@ export default function Header() {
   });
 
   return (
-    <header className="box-layout flex flex-col lg:flex-row gap-10">
-      <div className="flex basis-[60%] flex-col gap-5 justify-between">
+    <header className="box-layout flex flex-col gap-10 lg:flex-row">
+      <div className="flex basis-[60%] flex-col justify-between gap-5">
         <div className="flex flex-col">
           <AuthorState presence={presence} />
           <Introduction />

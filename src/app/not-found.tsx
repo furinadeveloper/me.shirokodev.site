@@ -1,10 +1,14 @@
-import Link from 'next/link';
-import './not-found.css'
+import Link from "next/link";
+import "./not-found.css";
 export default function NotFound() {
   return (
-    <main className='flex flex-col justify-center items-center text-white min-h-screen'>
+    <main className="flex min-h-screen flex-col items-center justify-center text-white">
       <span>Page Not Found._.</span>
-      <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster my-5">
+      <div
+        aria-label="Orange and tan hamster running in a metal wheel"
+        role="img"
+        className="wheel-and-hamster my-5"
+      >
         <div className="wheel"></div>
         <div className="hamster">
           <div className="hamster__body">
