@@ -12,39 +12,21 @@ export default function Introduction() {
   const [age, setAge] = useState<string>("");
   const [beginTime, setBeginTime] = useState<string>("");
 
-  const startTime = {
-    month: 7,
-    year: 2023,
-  };
-
   useEffect(() => {
-    const now = new Date();
+    const birthday = new Date();
+    birthday.setDate(9);
+    birthday.setMonth(9);
+    birthday.setFullYear(2007);
+    const age = new Date().valueOf() - birthday.valueOf();
+    setAge(Math.floor(age / 1000 / 60 / 60 / 24 / 365).toString());
 
-    const nowYear = now.getFullYear();
-    const nowMonth = now.getMonth() + 1;
-
-    const totalMonthLearning = nowMonth - startTime.month;
-    const totalYearLearning = nowYear - startTime.year;
-
-    const fullAge = nowYear - 2007;
-    setAge(
-      `${Math.floor(fullAge / 10)}${
-        Number(String(fullAge).slice(1)) >= 5 ? "X" : "x"
-      }`,
-    );
-
-    if (totalYearLearning * 12 + totalMonthLearning < 12) {
-      setBeginTime(
-        `${totalMonthLearning} ${
-          totalMonthLearning === 1 ? "month" : "months"
-        }`,
-      );
-    } else {
-      setBeginTime(
-        `${totalYearLearning} ${totalYearLearning === 1 ? "year" : "years"}`,
-      );
-    }
-  }, [startTime.month, startTime.year]);
+    const code = new Date();
+    code.setDate(24);
+    code.setMonth(7);
+    code.setFullYear(2023);
+    const ct = new Date().valueOf() - code.valueOf();
+    setBeginTime(`${(ct / 1000 / 60 / 60 / 24 / 365).toFixed(2)} years`);
+  }, []);
 
   return (
     <>

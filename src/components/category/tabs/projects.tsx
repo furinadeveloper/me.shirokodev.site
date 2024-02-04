@@ -8,7 +8,7 @@ import Djs from "@/svgs/app/djs.svg";
 import Image from "next/image";
 import profileImage from "@/images/projects/profile.png";
 import homepageImage from "@/images/projects/homepage.png";
-import shirokoBot from "@/images/projects/shiroko-bot.png";
+import owoSelfBot from "@/images/projects/owo-selfbot.png";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
@@ -17,6 +17,7 @@ config();
 
 export default function Projects() {
   const { ref, inView } = useInView({ delay: 1000, triggerOnce: true });
+  
   return (
     <section
       ref={ref}
@@ -40,14 +41,14 @@ export default function Projects() {
         repo="https://github.com/sunaookamishirokodev/me.shirokodev.site"
         use={[Nextjs, Tailwindcss, Motion, Socket]}
       />
-      {/* <Project
-        title="shiroko bot discord"
-        desc="Shiroko's bot make by Shiroko(:"
-        img={shirokoBot}
-        link={`https://discord.com/api/oauth2/authorize?client_id=1180883882552348812&permissions=8&scope=bot`}
-        repo="https://github.com/sunaookamishirokodev/shiroko-bot"
+      <Project
+        title="owo-selfbot"
+        desc="A tool to play OwO' automatic"
+        img={owoSelfBot}
+        link="https://github.com/sunaookamishirokodev/owo-selfbot"
+        repo="https://github.com/sunaookamishirokodev/owo-selfbot"
         use={[Djs]}
-      /> */}
+      />
     </section>
   );
 }
@@ -101,16 +102,14 @@ function Project({
           </Link>
         </div>
 
-        <Link
+        <div
           tabIndex={-1}
-          href={link}
           className="absolute left-[60%] top-8 hidden w-[28.25rem] shadow-2xl transition
         group-hover:-translate-x-3 
         group-hover:translate-y-3
         group-hover:-rotate-2
         group-hover:scale-[1.04]
         sm:block"
-          target="_blank"
         >
           <Image
             aria-label={`Preview ${link}`}
@@ -121,7 +120,7 @@ function Project({
             quality={95}
             className="rounded-l-md"
           />
-        </Link>
+        </div>
       </div>
     </section>
   );

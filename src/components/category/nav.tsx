@@ -11,12 +11,10 @@ export default function Nav({
 }: {
   nav: navType[];
   tab: string | null;
-  setTab: Dispatch<SetStateAction<string | null>>;
+  setTab: Dispatch<SetStateAction<string>>;
 }) {
   const [isPending, startTransition] = useTransition();
   const { ref, inView } = useInView({ delay: 500, triggerOnce: true });
-
-  useEffect(() => {}, []);
 
   return (
     <nav

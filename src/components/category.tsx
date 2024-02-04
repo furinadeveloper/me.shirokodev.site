@@ -94,8 +94,8 @@ const nav = [
 
 export default function Category() {
   const searchParams = useSearchParams();
-  const [tab, setTab] = useState<null | string>(
-    searchParams.get("tab") || nav[0].query,
+  const [tab, setTab] = useState<string>(
+    searchParams.get("tab") ?? nav[0].query,
   );
   return (
     <div className="box-layout">
