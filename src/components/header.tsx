@@ -21,6 +21,11 @@ function sendIdentify(): Promise<{
   return new Promise((resolve) => {
     socket.once("identify:result", (data) => {
       data = JSON.parse(data);
+      if (data.error === "USER_NOT_FOUND") {
+        return console.log(
+          "You have not joined the server yet. Please click here: https://discord.gg/hH48zm8Bvw",
+        );
+      }
       resolve(data);
     });
     socket.emit(
@@ -39,14 +44,20 @@ export default function Header() {
   useEffect(() => {
     socket.once("user:ready", () => {
       sendIdentify().then();
+      console.log("Socket Ready");
     });
 
     socket.on("presence:update", (data) => {
+      console.log("Socket Update");
       data = JSON.parse(data);
       setTimestamp(data.activity?.timestamps?.start);
       setPresence(data);
     });
-  });
+
+    return () => {
+      socket.disconnect();
+  };
+  }, []);
 
   return (
     <header className="box-layout flex flex-col gap-10 lg:flex-row">

@@ -45,15 +45,12 @@ export default function VSCode({
       />
       <div className="my-auto pl-3">
         <div className="text-md sm:text-lg">
-          {presence?.activity?.name || "At school or home"}
+          {presence?.activity?.name || "There are no activities"}
         </div>
         <div>{(presence?.activity && presence?.activity?.state) || ""}</div>
         <div className="flex flex-col">
           {(presence?.activity && presence?.activity?.details) || (
-            <>
-              <span>🏠 | If (home) Sleeping...</span>
-              <span>🏫 | If (school) Studying...</span>
-            </>
+              <span>Maybe sleeping now zzz:c</span>
           )}
         </div>
         <div>
