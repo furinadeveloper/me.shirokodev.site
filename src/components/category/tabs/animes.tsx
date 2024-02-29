@@ -11,7 +11,9 @@ import OshinoKo from "@/images/animes/OshinoKo.jpg";
 import SeishunButa from "@/images/animes/SeishunButa.jpg";
 import ReZero from "@/images/animes/Re_Zero.jpg";
 import LycorisRecoil from "@/images/animes/LycorisRecoil.jpg";
+import SoloLeveling from "@/images/animes/SoloLeveling.jpg";
 import { useInView } from "react-intersection-observer";
+
 export default function Animes() {
   const { ref, inView } = useInView({ triggerOnce: true, delay: 1000 });
   return (
@@ -22,6 +24,13 @@ export default function Animes() {
       }`}
     >
       {[
+        {
+          name: "Solo leveling",
+          description:
+            "Changing from the weakest Hunter to the strongest S-rank Hunter!",
+          image: SoloLeveling,
+          url: "https://anilist.co/anime/151807/Ore-dake-Level-Up-na-Ken/",
+        },
         {
           name: "Sword Art Online: Alicization",
           description:
