@@ -23,7 +23,7 @@ function sendIdentify(): Promise<{
       data = JSON.parse(data);
       if (data.error === "USER_NOT_FOUND") {
         return console.log(
-          "You have not joined the server yet. Please click here: https://discord.gg/hH48zm8Bvw",
+          "Error when verify user!",
         );
       }
       resolve(data);
@@ -31,7 +31,7 @@ function sendIdentify(): Promise<{
     socket.emit(
       "identify",
       JSON.stringify({
-        userId: "962375717465763961",
+        userId: "1216624112139632711",
       }),
     );
   });
@@ -56,7 +56,7 @@ export default function Header() {
 
     return () => {
       socket.disconnect();
-  };
+    };
   }, []);
 
   return (
