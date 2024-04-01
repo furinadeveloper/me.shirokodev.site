@@ -22,9 +22,7 @@ function sendIdentify(): Promise<{
     socket.once("identify:result", (data) => {
       data = JSON.parse(data);
       if (data.error === "USER_NOT_FOUND") {
-        return console.log(
-          "Error when verify user!",
-        );
+        return console.log("Error when verify user!");
       }
       resolve(data);
     });

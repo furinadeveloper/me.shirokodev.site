@@ -36,7 +36,7 @@ export default function Introduction() {
       <p className="mb-2 text-lg">
         ● I&apos;m {age} years old and have been studying it for {beginTime}.
       </p>
-      <p className="mb-2 text-lg">● Front-end Developer from Elaina Team.</p>
+      <p className="mb-2 text-lg">● Fullstack Developer from Elaina Team.</p>
       <p className="mb-2 text-lg">
         ● Experienced with Next.JS and Linux System.
       </p>
@@ -58,12 +58,12 @@ export default function Introduction() {
           },
           {
             name: "Gmail",
-            link: `mailto:me@shirokodev.site`,
+            link: `mailto:lethanhtrung.trungle@gmail.com`,
             icon: GmailIcon,
           },
           {
             name: "Discord",
-            link: "https://discord.com/users/962375717465763961",
+            link: "https://discord.com/users/1216624112139632711",
             icon: DiscordIcon,
           },
         ].map((item, index) => {
