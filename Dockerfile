@@ -1,11 +1,9 @@
 
-FROM node:18-alpine
+FROM node:20
 LABEL author="shirokodev <lethanhtrung.trungle@gmail>"
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN apk add --no-cache git \
-    && npm install --frozen-lockfile \
-    && npm cache clean
+RUN npm install
 COPY . .
 RUN npm run build
 EXPOSE 2222

@@ -41,14 +41,14 @@ export default function Projects() {
         repo="https://github.com/sunaookamishirokodev/me.shirokodev.site"
         use={[Nextjs, Tailwindcss, Motion, Socket]}
       />
-      {/* <Project
+      <Project
         title="owo-selfbot"
         desc="A tool to play OwO' automatic"
         img={owoSelfBot}
         link="https://github.com/sunaookamishirokodev/owo-selfbot"
         repo="https://github.com/sunaookamishirokodev/owo-selfbot"
         use={[Djs]}
-      /> */}
+      />
     </section>
   );
 }
