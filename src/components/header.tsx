@@ -9,9 +9,7 @@ const VSCode = lazy(() => import("./header/vscode"));
 
 const socket = io("wss://gateway.shirokodev.site", {
   withCredentials: true,
-  extraHeaders: {
-    "shiroko-socket": "shiroko-presence",
-  },
+  
 });
 function sendIdentify(): Promise<{
   error: string;
@@ -41,8 +39,8 @@ export default function Header() {
 
   useEffect(() => {
     socket.once("user:ready", () => {
-      sendIdentify().then();
-      console.log("Socket Ready");
+      sendIdentify().then(() => console.log("Socket Ready"));
+      console.log("Ready");
     });
 
     socket.on("presence:update", (data) => {

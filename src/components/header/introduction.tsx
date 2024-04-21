@@ -6,6 +6,7 @@ import {
   GithubIcon,
   GmailIcon,
 } from "@/resources/social";
+import {formatDistanceToNow} from "date-fns"
 import { useEffect, useState } from "react";
 
 export default function Introduction() {
@@ -17,15 +18,13 @@ export default function Introduction() {
     birthday.setDate(9);
     birthday.setMonth(9);
     birthday.setFullYear(2007);
-    const age = new Date().valueOf() - birthday.valueOf();
-    setAge(Math.floor(age / 1000 / 60 / 60 / 24 / 365).toString());
+    setAge(formatDistanceToNow(birthday));
 
     const code = new Date();
     code.setDate(24);
     code.setMonth(7);
     code.setFullYear(2023);
-    const ct = new Date().valueOf() - code.valueOf();
-    setBeginTime(`${(ct / 1000 / 60 / 60 / 24 / 365).toFixed(2)} years`);
+    setBeginTime(formatDistanceToNow(code));
   }, []);
 
   return (
@@ -34,7 +33,7 @@ export default function Introduction() {
         ● Hi there, I&apos;m Shiroko - a normal student love programming.
       </p>
       <p className="mb-2 text-lg">
-        ● I&apos;m {age} years old and have been studying it for {beginTime}.
+        ● I&apos;m {age} and have been studying it for {beginTime}.
       </p>
       <p className="mb-2 text-lg">● Fullstack Developer from Elaina Team.</p>
       <p className="mb-2 text-lg">
